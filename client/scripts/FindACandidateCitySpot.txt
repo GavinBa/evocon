@@ -1,0 +1,9 @@
+// check title (player.playerInfo.titleId) (0-9)
+// get number of cities (cities.length)
+if player.playerInfo.titleId >= cities.length
+// if room for another city
+//    scan from 5-10 miles away for a flat
+//    for each flat
+//       scan from flat for 5 miles for npc5s
+//       if number of 5's > 4 then
+//          build city

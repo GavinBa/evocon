@@ -1,0 +1,7 @@
+echo "i am here"
+echo "city W"
+echo "wood amount 323484.51374026"
+echo "hero salary 5860"
+ns=256
+echo "done"
+echo "Page generated in 0.010 seconds."

@@ -1,0 +1,11 @@
+// x = __x__
+// y = __y__
+
+t = []
+//x,y,maxdist,type,level,mindist
+//FindField(city.x, city.y, maxDist, type, level, minDist)
+fields = FindField(__x__,__y__,5,GetFieldType("npc"),5,1)
+fields.forEach(CreateFunction("f,i,a","t.push(GetDetailInfo(f))"))
+if t.length < fields.length repeat
+v = { "fields" : t }
+p2v = json_encode(v)

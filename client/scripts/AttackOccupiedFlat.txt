@@ -1,0 +1,8 @@
+// convertible params:
+//   owner  = __user__
+//   coords = __coords__
+config acquireflats:0
+//TODO also release a field if necessary
+echo 'attacking __coords__ any w:1k - owned by __user__ with ' && city.bestIdleAttackHero().name
+tr = GetTroops('w:1k')
+if city.rallySpotAvailable() && !city.notEnoughTroops(tr) && city.bestIdleAttackHero() && !city.bestIdleAttackHero().isMayor && city.trainingHeroName != city.bestIdleAttackHero().name attack __coords__ any w:1k
