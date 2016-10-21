@@ -76,7 +76,7 @@ class DbNeighbors {
      $result = $this->m_db->query("UPDATE neighbors SET lastCheck='" . $lastCheck . "' WHERE _id=".$this->getId());
   }
   
-  public function getLastCheck ($cs) {
+  public function getLastCheck () {
      $lastCheck = 0;
      $result = $this->m_db->query("SELECT lastCheck FROM neighbors WHERE _id=".$this->getId());
      if ($result && $result->num_rows > 0) {

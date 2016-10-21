@@ -1,0 +1,10 @@
+// x = __x__
+// y = __y__
+// tr = __tr__
+// trainer = __trainer__
+echo "x=__x__, y=__y__, tr=__tr__, trainer=__trainer__"
+sleep 5
+tr = "__tr__"
+coords = "__x__,__y__"
+echo "Attacking dead city __x__,__y__"
+if !city.notEnoughTroops(GetTroops(tr)) execute "attack {coords} !__trainer__,any {tr}"

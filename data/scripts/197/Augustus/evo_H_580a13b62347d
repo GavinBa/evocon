@@ -1,0 +1,47 @@
+echo 'Found 27 castles.'
+echo '1972088  since last check'
+echo 'before=1812302 after=1812302'
+echo 'Scouting 566,412'
+scout 566,412
+// x = 566
+
+// y = 412
+
+// ts = s:1
+
+
+
+coords = "566,412"
+
+targetId = GetFieldId(coords)
+
+// converts coords into fieldId
+
+
+
+troops = "s:1"
+
+troopBean = GetTroops(troops)
+
+// converts troop string into troopBean object
+
+
+
+transTime = city.getTravelTime(city.fieldId, targetId, troopBean, 2)  
+
+// returns time to transport or reinforce target coords in seconds - from point A (city.fieldId) to point B (targetId) using specified troopBean
+
+
+
+attackTime = city.getTravelTime(city.fieldId, targetId, troopBean, 5)  
+
+// returns time to send attack or scout to target coords in seconds - from point A (city.fieldId) to point B (targetId) using specified troopBean
+
+
+
+v = { "transit" : transTime, "attack" : attackTime }
+
+p2v = json_encode(v)
+
+echo "done"
+echo "Page generated in 0.021 seconds."

@@ -8,6 +8,7 @@ define("STATE_WAR",                       0x00000200);
 define("STATE_NEWCITY",                   0x00000400);
 define("STATE_IDLEBUILDS",                0X00000800);
 define("STATE_DEADCITIES",                0x00001000);
+define("STATE_MARKET",                    0x00002000);
 define("STATE_GROUP_MASK",                0xFFFFFF00);
 
 /* Monitor States */
@@ -24,14 +25,23 @@ define("STATE_NEWCITY_BESTFLAT",          0x00000404);
 
 /* Dead cities */
 define("STATE_DEADCITIES_CASTLES",        0x00001001);
+define("STATE_DEADCITIES_WAITSCOUT",      0x00001002);
+define("STATE_DEADCITIES_SCOUTING",       0x00001003);
+define("STATE_DEADCITIES_REPORT",         0x00001004);
+
+/* Market */
+define("STATE_MARKET_BUYSELL",            0x00002001);
 
 /* Process Slices */
-define("SLICE_IDLE", 0);
-define("SLICE_MONITOR", 1);
-define("SLICE_NEWCITY", 2);
-define("SLICE_IDLEBUILDS", 3);
-define("SLICE_DEADCITIES", 4);
-define("SLICE_MAX", 5);
+/*   Unspecified slices between 0 and SLICE_MAX (e.g. 1) will default */
+/*   to the MARKET state.                                             */
+define("SLICE_IDLE",            0);
+define("SLICE_MONITOR",         2);
+define("SLICE_NEWCITY",         4);
+define("SLICE_IDLEBUILDS",      6);
+define("SLICE_DEADCITIES",      8);
+define("SLICE_MARKET",         10);
+define("SLICE_MAX",            11);
 
 
 function getGroup($state) {

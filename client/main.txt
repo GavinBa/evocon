@@ -1,3 +1,7 @@
+label autorun
+echo "Starting main client script..."
+sleep 5
+
 p1v = p2v = p3v = p4v = p5v = p6v = p7v = p8v = p9v = null
 
 // url - main entry point of server
@@ -7,7 +11,7 @@ label mainLoop
 
 // get a copy of city manager
 // clear portions which accumulate over time
-(c = city) && !(c.script.currentScript = null) && !(c.script.currentCommand = null) && (c.log.reset())
+(c = city) && !(c.script = null) && (c.log.reset())
 
 // encode the modified city manager object
 p1v = json_encode(c)

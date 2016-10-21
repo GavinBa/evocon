@@ -1,0 +1,26 @@
+// The script is 1 part of 2 parts to log market prices for use as data for
+// trading simulations.
+
+// This script has not been optimized for performance mainly for clarity and
+// the fact that the market doesn't need to be sampled at a fast rate.
+
+
+// Arrays to hold sell (sp) and buy (bp) prices using the standard resource indeces
+//    [0] food, [1] wood, [2] stone, [3] iron
+2: sp = bp = []
+
+// Main loop: sample prices, post prices, delay
+3: if !m_context.marketReady() goto EOS
+4: marketupdate 0
+5: (x = sp.splice(0,1,SellPrice(0))) && (x = bp.splice(0,1,BuyPrice(0)))
+6: marketupdate 1
+7: (x = sp.splice(1,1,SellPrice(1))) && (x = bp.splice(1,1,BuyPrice(1)))
+8: marketupdate 2
+9: (x = sp.splice(2,1,SellPrice(2))) && (x = bp.splice(2,1,BuyPrice(2)))
+10: marketupdate 3
+11: (x = sp.splice(3,1,SellPrice(3))) && (x = bp.splice(3,1,BuyPrice(3)))
+12: POST "http://192.168.1.77:8000/code/market/logger.php" {fps:sp[0],fpb:bp[0],wps:sp[1],wpb:bp[1],sps:sp[2],spb:bp[2],ips:sp[3],ipb:bp[3]}
+
+
+label EOS
+

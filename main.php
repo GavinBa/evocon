@@ -17,6 +17,7 @@ if (is_null($dbc)) {
 	return;
 }
 
+
 /* Get the city parameter */
 $p1 = util_setParam ("p1", 0);
 if (! is_string($p1)) {

@@ -1,0 +1,65 @@
+<reportData reportUrl="battle197.evony.com/default.html?logfile/20161014/da/a6/daa681dd938702b6817a83df19b5937b.xml">
+  <scoutReport isFound="true" isSuccess="true" isAttack="true">
+    <scoutInfo support="64" population="2890" gold="240000">
+      <resource>
+        <food>175000</food>
+        <wood>81479316</wood>
+        <iron>714865</iron>
+        <stone>1337223</stone>
+      </resource>
+      <fortifications>
+        <fortificationsType typeId="14" count="1000"/>
+        <fortificationsType typeId="15" count="1"/>
+      </fortifications>
+      <troops>
+        <troopStrType typeId="2" count="1"/>
+        <troopStrType typeId="3" count="216"/>
+        <troopStrType typeId="8" count="18"/>
+        <troopStrType typeId="11" count="18"/>
+      </troops>
+      <buildings>
+        <buildingType type="1" levels="3,3,3,3,3,3,3"/>
+        <buildingType type="2" levels="1,1,1,1,1,1,1,2,4,1,2,4,1"/>
+        <buildingType type="4" levels="3"/>
+        <buildingType type="5" levels="3"/>
+        <buildingType type="6" levels="3"/>
+        <buildingType type="7" levels="5"/>
+        <buildingType type="21" levels="2"/>
+        <buildingType type="22" levels="2"/>
+        <buildingType type="25" levels="6"/>
+        <buildingType type="26" levels="1"/>
+        <buildingType type="27" levels="6"/>
+        <buildingType type="28" levels="1"/>
+        <buildingType type="29" levels="5"/>
+        <buildingType type="30" levels="1"/>
+        <buildingType type="31" levels="5"/>
+        <buildingType type="32" levels="3"/>
+      </buildings>
+      <techs>
+        <techType type="1" level="6"/>
+        <techType type="2" level="6"/>
+        <techType type="3" level="4"/>
+        <techType type="4" level="6"/>
+        <techType type="5" level="9"/>
+        <techType type="7" level="10"/>
+        <techType type="8" level="9"/>
+        <techType type="9" level="10"/>
+        <techType type="10" level="10"/>
+        <techType type="11" level="9"/>
+        <techType type="12" level="10"/>
+        <techType type="13" level="9"/>
+        <techType type="14" level="10"/>
+        <techType type="15" level="1"/>
+        <techType type="17" level="8"/>
+        <techType type="16" level="10"/>
+      </techs>
+    </scoutInfo>
+    <battleInfo isAttack="true" unNomal="No defending troops found.">
+      <backTroop>
+        <troops>
+          <troopInfo typeId="4" remain="1"/>
+        </troops>
+      </backTroop>
+    </battleInfo>
+  </scoutReport>
+</reportData>

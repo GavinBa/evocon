@@ -1,0 +1,7 @@
+echo 'Food='
+echo 'Workers=0'
+echo 'Loyalty='
+echo 'report canAttack='
+echo 'unable to attack'
+echo "done"
+echo "Page generated in 0.038 seconds."

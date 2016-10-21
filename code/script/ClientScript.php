@@ -52,6 +52,11 @@ class ClientScript {
      fwrite($this->fp, $line . PHP_EOL);
   }
   
+  public function addEcho($msg) {
+     $this->addLine("echo '" . $msg . "'");
+  }
+  
+  
   public function debugOn() {
      $this->addLine("city.script.debug = true");
   }

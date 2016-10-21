@@ -10,7 +10,9 @@ class IdleBuild extends StateProcessor {
       array("Cottage",       "c", 9),
       array("Town Hall",     "t", 9),
       array("Marketplace",   "m", 9),
-      array("Barracks",      "b", 9)
+      array("Barracks",      "b", 9),
+      array("Sawmill",       "s", 8),
+      array("Ironmine",      "i", 8)
    );
    
    public function __construct($city) {

@@ -1,0 +1,18 @@
+// x : __x__
+// y : __y__
+
+1: idx = 0
+2: regexStr = ".*([0-9][0-9]:[0-9][0-9]:[0-9][0-9]).*href=.*http:(.*)default.html.(.*)xml.* Scout Reports.* to .*?(__x__,__y__).*"
+3: resx = regexp(regexStr).exec(Screen.reportLog.buffer.substr(idx))
+4: if resx = null goto NOTFOUND
+5: rpturl = "http:"+resx[2]+resx[3]+"xml"
+6: get rpturl
+7: if $error goto NOTFOUND
+rxml = $result
+v = {"report" : rxml }
+p2v = json_encode(v)
+goto EOS
+label NOTFOUND
+v = {"report" : "none"}
+p2v = json_encode(v)
+label EOS

@@ -10,6 +10,7 @@ class ClientRequest {
    var $m_user;
    var $m_city;
    var $m_cTime;
+   var $m_ut;
    
    public function __construct($dbc, $server, $user, $city) {
       $this->m_dbconnect = $dbc;
@@ -18,6 +19,7 @@ class ClientRequest {
       $this->m_user = $user;
       $this->m_city = $city;
       $this->m_cTime = 0;
+      $this->m_ut = false;
    }
    
    public function getDbconnect() {
@@ -46,6 +48,14 @@ class ClientRequest {
    
    public function setCtime($ctime) {
       $this->m_cTime = $ctime;
+   }
+   
+   public function isTest() {
+      return $this->m_ut;
+   }
+   
+   public function setUt($ut) {
+      $this->m_ut = $ut;
    }
 
 }

@@ -20,6 +20,10 @@ class City {
      return count($this->m_city->enemyArmies) > 0;
   }
   
+  public function getRallyLevel() {
+     return 0;
+  }
+  
   public function getJson() {
      return $this->m_city;
   }

@@ -4,6 +4,7 @@ require_once "code/states/StateMonitor.php";
 require_once "code/newcity/NewCity.php";
 require_once "code/buildings/IdleBuild.php";
 require_once "code/cities/DeadCities.php";
+require_once "code/market/Market.php";
 
 class StateController {
   var $m_city;
@@ -67,6 +68,11 @@ class StateController {
                $result = $p->process($this->m_cs,$state);
                break;
                
+            case STATE_MARKET:
+               $p = new StateMarket($this->m_city,$this->m_cr);
+               $result = $p->process($this->m_cs,$state);
+               break;
+               
            default:
              $result = STATE_IDLE;
              break;
@@ -100,9 +106,11 @@ class StateController {
           case SLICE_DEADCITIES:
             $result = STATE_DEADCITIES;
             break;
-            
+          case SLICE_MARKET:
+            $result = STATE_MARKET;
+            break;
           default:
-            $result = STATE_IDLE;
+            $result = STATE_MARKET;
             break;
        }
        return $result;

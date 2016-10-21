@@ -40,6 +40,7 @@ class NewCity extends StateProcessor {
                $cs->addLine("echo '-----NO BUILD----'" . PHP_EOL);
                $result = STATE_IDLE;
             }
+            $result = STATE_IDLE;
             break;
             
          case STATE_NEWCITY_FINDFLAT:

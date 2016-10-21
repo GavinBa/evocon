@@ -18,6 +18,19 @@ class DbCastle {
    $this->m_err = "";
   }
   
+  public static function fromExisting($db, $castleid) {
+     $instance = new self($db,0,0,0);
+     $result = $db->query("SELECT server,x,y FROM castle WHERE _id=" . $castleid);
+     if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $instance->m_id = $castleid;
+        $instance->m_server = $row["server"];
+        $instance->m_x = $row["x"];
+        $instance->m_y = $row["y"];
+     }
+     return $instance;
+  }
+  
   public function create() {
 	  /* Query on server, player, city name */
 	  $result = $this->m_db->query("SELECT _id FROM castle where server=" . 
