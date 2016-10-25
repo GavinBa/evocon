@@ -1,0 +1,20 @@
+// x = __x__
+// y = __y__
+// ts = __troops__
+
+coords = "__x__,__y__"
+targetId = GetFieldId(coords)
+// converts coords into fieldId
+
+troops = "__troops__"
+troopBean = GetTroops(troops)
+// converts troop string into troopBean object
+
+transTime = city.getTravelTime(city.fieldId, targetId, troopBean, 2)  
+// returns time to transport or reinforce target coords in seconds - from point A (city.fieldId) to point B (targetId) using specified troopBean
+
+attackTime = city.getTravelTime(city.fieldId, targetId, troopBean, 5)  
+// returns time to send attack or scout to target coords in seconds - from point A (city.fieldId) to point B (targetId) using specified troopBean
+
+v = { "transit" : transTime, "attack" : attackTime }
+p2v = json_encode(v)

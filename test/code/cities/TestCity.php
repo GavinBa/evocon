@@ -20,3 +20,5 @@ class TestCity extends TestCase
 	   $this->assertTrue(true);
 	}
 }
+
+?>

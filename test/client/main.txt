@@ -1,0 +1,32 @@
+label autorun
+echo "Starting main client script..."
+sleep 5
+
+p1v = p2v = p3v = p4v = p5v = p6v = p7v = p8v = p9v = null
+
+// url - main entry point of server
+url="http://192.168.1.77:8000/main.php"
+
+label mainLoop
+
+// get a copy of city manager
+// clear portions which accumulate over time
+(c = city) && !(c.script = null) && (c.log.reset())
+
+// encode the modified city manager object
+p1v = json_encode(c)
+
+
+// send command
+POST url {p1:p1v, time:date().time, server:197, player:player.playerInfo.userName,p2:p2v,p3:p3v,p4:p4v,p5:p5v,p6:p6v,p7:p7v,p8:p8v,p9:p9v}
+tgt = $result
+
+// reset parameter values - settable by called script
+p1v = p2v = p3v = p4v = p5v = p6v = p7v = p8v = p9v = null
+
+// process result (which should be a url passed to the 'call')
+//echo tgt
+call tgt {time:date().time}
+
+// again
+loop mainLoop

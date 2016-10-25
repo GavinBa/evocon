@@ -1,0 +1,13 @@
+// check title (player.playerInfo.titleId) (0-9)
+// get number of cities (cities.length)
+x = 0
+if player.playerInfo.titleId >= cities.length x = 1
+v = { "result" : x}
+// if room for another city
+p2v = json_encode(v)
+
+//    scan from 5-10 miles away for a flat
+//    for each flat
+//       scan from flat for 5 miles for npc5s
+//       if number of 5's > 4 then
+//          build city

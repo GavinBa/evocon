@@ -12,8 +12,10 @@ define("STATE_MARKET",                    0x00002000);
 define("STATE_GROUP_MASK",                0xFFFFFF00);
 
 /* Monitor States */
-define("STATE_MONITOR_FIELDS",            0x00000101);
-define("STATE_MONITOR_FIELDS_RESULTS",    0x00000102);
+define("STATE_MONITOR_FIELDS",              0x00000101);
+define("STATE_MONITOR_FIELDS_RESULTS",      0x00000102);
+define("STATE_MONITOR_REPORT_BUFFER",       0x00000103);
+define("STATE_MONITOR_STORE_REPORT_BUFFER", 0x00000104);
 
 /* War states */
 
@@ -28,6 +30,7 @@ define("STATE_DEADCITIES_CASTLES",        0x00001001);
 define("STATE_DEADCITIES_WAITSCOUT",      0x00001002);
 define("STATE_DEADCITIES_SCOUTING",       0x00001003);
 define("STATE_DEADCITIES_REPORT",         0x00001004);
+define("STATE_DEADCITIES_SEARCH",         0x00001005);
 
 /* Market */
 define("STATE_MARKET_BUYSELL",            0x00002001);

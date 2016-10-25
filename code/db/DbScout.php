@@ -33,19 +33,18 @@ class DbScout {
   }
   
   public static function fromExisting($db, $dbcity) {
-     $instance = new self($db,$dbcity,-1,0,0);
 
 	  $result = $db->query("SELECT _id,castleid,state,x,y FROM scout where cityid=" . 
 			$dbcity->getId());
          
      if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $instance->m_castleid = $row["castleid"];
-        $instance->m_x = $row["x"];
-        $instance->m_y = $row["y"];
+        $instance = new self($db,$dbcity,$row["castleid"],$row["x"],$row["y"]);
         $instance->m_state = $row["state"];
      } else {
-        $instance->m_state = SCOUT_NOTARGET;
+        $instance = new self($db,$dbcity,0,-2,-3);
+        $instance->setState(SCOUT_NOTARGET);
+        $instance->m_state = $instance->getState();
      }
 
      if ($result) {
@@ -67,14 +66,24 @@ class DbScout {
             SCOUT_IDLE . "', '" .
             $this->m_castleid . "', '" .
             $this->m_x . "', '" . $this->m_y . "')");
+     } else {
+        $uresult = $this->m_db->query("UPDATE scout SET castleid=".$this->m_castleid.",x=".$this->m_x.",y=".$this->m_y." WHERE cityid=".$this->m_dbcity->getId());
+        if (!$uresult) {
+           printf("___ERROR UPdating: %s\n",$this->m_db->error);
+        }
      }
      if ($result) {
         $result->free();
      }
   }
   
+  public function delete() {
+	  $result = $this->m_db->query("DELETE FROM scout WHERE cityid=" . $this->m_dbcity->getId());
+     return $result;
+  }
+  
   public function isIdle() {
-     return $this->getState() == SCOUT_IDLE;
+     return ($this->getState() == SCOUT_IDLE || $this->getState() == SCOUT_NOTARGET);
   }
   
   public function hasTarget() {
@@ -95,6 +104,9 @@ class DbScout {
      return $state;
   }
   
+  public function setState($newstate) {
+     $result = $this->m_db->query("UPDATE scout SET state=" . $newstate . " WHERE _id=" . $this->getId());
+  }
  
   public function getCastleId() {
      return $this->m_castleid;
@@ -140,6 +152,23 @@ class DbScout {
         $result->free();
      }
      return $scoutTime;
+  }
+  
+  public function setReportTime ($rt) {
+     $result = $this->m_db->query("UPDATE scout SET reportTime='" . $rt . "' WHERE _id=" . $this->getId());
+  }
+  
+  public function getReportTime() {
+     $rptTime = 0;
+     $result = $this->m_db->query("SELECT reportTime FROM scout WHERE _id=" . $this->getId());
+     if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $rptTime = $row["reportTime"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $rptTime;
   }
 
   public function setAttackTime($attackTime) {

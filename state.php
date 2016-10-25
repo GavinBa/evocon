@@ -35,17 +35,12 @@ class StateController {
          switch ($group) {
 
             case STATE_IDLE:
-             $ps = $this->m_cr->getDbc()->getProcessSlice();
-             $ps++;
-             if ($ps >= SLICE_MAX) {
-                $ps = SLICE_IDLE;
-             }
-             $this->m_cr->getDbc()->setProcessSlice($ps);
+             $ps = $this->getNextSlice();
              $result = $this->slice($ps);
             break;
             
             case STATE_MONITOR:
-               $p = new StateMonitor($this->m_city);
+               $p = new StateMonitor($this->m_cr, $this->m_city);
                $result = $p->process($this->m_cs,$state);
                break;
                
@@ -77,6 +72,11 @@ class StateController {
              $result = STATE_IDLE;
              break;
          }
+         
+         if ($result == STATE_SUSPEND) {
+             $ps = $this->getNextSlice();
+             $group = $this->slice($ps);
+         }
       }
 
       /* If all states reach a suspended state then transition back to idle. */      
@@ -86,6 +86,16 @@ class StateController {
 
       return $result;
 	  
+   }
+   
+   protected function getNextSlice() {
+      $ps = $this->m_cr->getDbc()->getProcessSlice();
+      $ps++;
+      if ($ps >= SLICE_MAX) {
+         $ps = SLICE_IDLE;
+      }
+      $this->m_cr->getDbc()->setProcessSlice($ps);
+      return $ps;
    }
 
    /* Use the current process slice to set the associated state. */   

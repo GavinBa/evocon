@@ -19,8 +19,20 @@ class DeadCities extends StateProcessor {
 
    public function process($cs,$state) {
       
+      /* Create a Scouter instance and see if we have a target set. */
+      $scouter = Scouter::fromExisting($this->m_cr,$cs);
+
+      
       switch ($state) {
          case STATE_DEADCITIES:
+            if (Scouter::isActiveScout($this->m_cr,$cs)) {
+               $result = STATE_DEADCITIES_SCOUTING;
+            } else {
+               $result = STATE_DEADCITIES_SEARCH;
+            }
+            break;
+
+         case STATE_DEADCITIES_SEARCH:
             $cs->addLine("echo 'Searching for dead cities nearby...'");
             $a = [ "x" => $this->m_city->getJson()->x, "y" => $this->m_city->getJson()->y, "d" => 15];
             $cs->injectScriptVars("client/scripts/FindCastles.txt",$a);
@@ -40,7 +52,7 @@ class DeadCities extends StateProcessor {
                   $f = new Field($field);
                   $pres = $f->getPrestige();
                   if ($this->isCandidate($f)) {
-                     
+                     $cs->addLine("//found a candidate");
                      $castle = $this->addTargetCastle($f);
                      
                      // check time of last evaluation
@@ -49,6 +61,8 @@ class DeadCities extends StateProcessor {
                      $lastCheck = $nb->getLastCheck();
                      $f1 = floatval($lastCheck);
                      $f2 = floatval($this->m_cr->getCtime());
+                     $cs->addLine("echo 'found a candidate'");
+                     $cs->addLine("// comparing ". $f1 . " to " . $f2);
                      
                      if ($this->timeToCheckPres($f2,$f1)) {
                         $cs->addLine("echo '".($f2-$f1)."  since last check'");
@@ -61,6 +75,8 @@ class DeadCities extends StateProcessor {
                               $scoutSent = true;
                               $a = [ "x" => $scouter->getX(), "y" => $scouter->getY(), "troops" => $scouter->getTroopStr()];
                               $cs->injectScriptVars("client/scripts/GetTravelTime.txt",$a);
+                           } else {
+                              $cs->addLine("echo 'Not able to scout it however'");
                            }
                         }
                         $nb->setLastCheck((string)$this->m_cr->getCtime());
@@ -78,14 +94,11 @@ class DeadCities extends StateProcessor {
             
          case STATE_DEADCITIES_WAITSCOUT:
             $scouter = Scouter::fromExisting($this->m_cr,$cs);
-            if ($scouter->isArrived($scouter->getAttackTime())) {
-                  /* Find the report in the reports buffer and return the xml */
-                  $a = [ "x" => $scouter->getX(), "y" => $scouter->getY()];
-                  $cs->injectScriptVars("client/scripts/GetScoutReportOfCity.txt", $a);
-                  $result = STATE_DEADCITIES_REPORT;
-            }
-            else {
-               $result = STATE_DEADCITIES_WAITSCOUT;
+            $rb = new ReportBuffer($this->m_cr->getDbconnect(),$this->m_city, $this->m_cr);
+            if ($rb->getLastUpdate() > $scouter->getReportTime()) {
+               $result = STATE_DEADCITIES_REPORT;
+            } else {
+               $result = STATE_SUSPEND;
             }
             break;
 
@@ -104,32 +117,43 @@ class DeadCities extends StateProcessor {
             }
 
             if ($scouter->isArrived($attackTime)) {
+               /* Now we need to wait for the report buffer to be updated */
+               /* from this point.                                        */
+               if ($scouter->getReportTime() == 0) {
+                  $scouter->setReportTime($this->m_cr->getCtime());
+                  $result = STATE_SUSPEND;
+               } else {
+                  $result = STATE_DEADCITIES_WAITSCOUT;
+               }
+               
                /* Find the report in the reports buffer and return the xml */
+               /*
                $a = [ "x" => $scouter->getX(), "y" => $scouter->getY()];
                $cs->injectScriptVars("client/scripts/GetScoutReportOfCity.txt", $a);
                $result = STATE_DEADCITIES_REPORT;
+               */
             } else {
                $result = STATE_DEADCITIES_SCOUTING;
             }
             break;
             
          case STATE_DEADCITIES_REPORT:
-            $p2 = util_setParam("p2", 0);
-            $p2json = json_decode($p2);
-            if (!isset($p2json->report) || $p2json->report == "none") {
-               $cs->addLine("echo 'not found yet'");
-//               $result = STATE_DEADCITIES_SCOUTING;
-               $result = STATE_IDLE;
+            /* At this point the scout is complete and the report buffer has */
+            /* been updated.                                                 */
+            $rb = new ReportBuffer($this->m_cr->getDbconnect(),$this->m_city, 
+                                   $this->m_cr);            
+            $rpt = $rb->getLastReport($scouter->getX(),$scouter->getY());
+            $url = $rb->getUrlFromReport($rpt);
+            if (strlen($url) > 0 && $this->get_http_response_code($url) == "200") {
+               $xml = file_get_contents($rb->getUrlFromReport($rpt));
+               $sr = new ScoutReport($xml);
+               $cs->addLine("echo 'food=".$sr->getFood()."'");
             } else {
-               $sr = new DeadCityReport($p2json->report);
-               $cs->addEcho("Food=" . $sr->getFood());
-               $cs->addEcho("Workers=" . $sr->getWorkers());
-               $cs->addEcho("Loyalty=" . $sr->getLoyalty());
-               $cs->addEcho("report canAttack=" . $sr->canAttack());
-               $adc = new AttackDeadCity($this->m_city,$this->m_cr,$sr);
-               $adc->attack($cs);
-               $result = STATE_IDLE;
+               $cs->addLine("echo 'No URL from report buffer: " . $url . "'");
             }
+            $result = STATE_IDLE;
+            Scouter::complete($this->m_cr,$cs);
+            
             break;
             
          default:
@@ -168,6 +192,10 @@ class DeadCities extends StateProcessor {
       return ($currTime - $lastTime) > 1800000;
    }
    
+   protected function get_http_response_code($url) {
+    $headers = get_headers($url);
+    return substr($headers[0], 9, 3);
+   }   
 }
 
 ?>

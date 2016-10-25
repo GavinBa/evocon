@@ -38,6 +38,18 @@ class Scouter {
       return $instance;
    }
    
+   public static function isActiveScout($cr,$cs) {
+      return DbScout::fromExisting($cr->getDbconnect(), $cr->getDbc())->hasTarget();
+   }
+   
+   public function setReportTime ($rt) {
+      $this->m_dbscout->setReportTime($rt);
+   }
+   
+   public function getReportTime () {
+      return $this->m_dbscout->getReportTime();
+   }
+   
    public function getTroopStr() { return "s:1"; }
    
    public function canScout() {
@@ -48,6 +60,7 @@ class Scouter {
       $this->m_cs->addLine("scout " . $this->m_dbcastle->getX() . "," . $this->m_dbcastle->getY());
       /* Update the time it was sent with the client time */
       $this->m_dbscout->setScoutTime($this->m_cr->getCtime());
+      $this->m_dbscout->setState(SCOUT_PENDING);
       
    }
    
@@ -67,6 +80,15 @@ class Scouter {
    
    public function getAttackTime() {
       return $this->m_dbscout->getAttackTime();
+   }
+   
+   public static function complete($cr, $cs) {
+      $dbs = DbScout::fromExisting($cr->getDbconnect(), $cr->getDbc());
+      if ($dbs->hasTarget()) {
+         if (!$dbs->delete()) {
+            printf("Error on delete\n");
+         }
+      }
    }
    
 }

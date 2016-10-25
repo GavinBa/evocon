@@ -28,6 +28,9 @@ class DbCity {
         $this->m_db->query("INSERT INTO city (server, player, name) VALUES ('" . 
             $this->m_server . "', '" . $this->m_player . "', '" . $this->m_city->getName() . "')");
      }
+     if ($result) {
+        $result->free();
+     }
   }
   
   public function getId() {
@@ -40,8 +43,31 @@ class DbCity {
            $row = $result->fetch_assoc();
            $this->m_id = $row["id"];
         }
+        if ($result) {
+           $result->free();
+        }
      }
      return $this->m_id;
+  }
+  
+  public function isLowestIdForPlayer() {
+     $myid = $this->getId();
+     return ($myid == $this->getLowestIdForPlayer());
+  }
+  
+  public function getLowestIdForPlayer() {
+     $lowid = -1;
+     $result = $this->m_db->query("SELECT id FROM city WHERE server=" .
+         $this->m_server . " AND player LIKE '" . $this->m_player .
+         "' ORDER BY id");
+     if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $lowid = $row["id"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $lowid;
   }
   
   public function setState ($state) {
@@ -57,6 +83,9 @@ class DbCity {
         $row = $result->fetch_assoc();
         $state = $row["state"];
      }
+     if ($result) {
+        $result->free();
+     }
      return $state;
   }
   
@@ -68,6 +97,9 @@ class DbCity {
      if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $pslice = $row["pslice"];
+     }
+     if ($result) {
+        $result->free();
      }
      return $pslice;
   }
@@ -84,6 +116,9 @@ class DbCity {
      if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $newcity = $row["newcity"];
+     }
+     if ($result) {
+        $result->free();
      }
      return $newcity;
   }

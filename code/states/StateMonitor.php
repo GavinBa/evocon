@@ -5,14 +5,18 @@ require_once "states.php";
 require_once "lib/util.php";
 require_once "code/fields/Field.php";
 require_once "code/heroes/heroes.php";
+require_once "code/reports/ReportBuffer.php";
+require_once "code/db/DbReportBuffer.php";
 
 class StateMonitor extends StateProcessor {
    
   var $m_city;
+  var $m_cr;
   
   
-  public function __construct($city) {
-	$this->m_city = $city;
+  public function __construct($cr, $city) {
+	  $this->m_city = $city;
+     $this->m_cr = $cr;
   }
   
   public function process($cs,$state) {
@@ -44,6 +48,26 @@ class StateMonitor extends StateProcessor {
                      }
                   }
                }
+            }
+            $result = STATE_MONITOR_REPORT_BUFFER;
+            break;
+            
+         case STATE_MONITOR_REPORT_BUFFER:
+            $dbcity = new DbCity($this->m_cr->getDbconnect(), $this->m_cr->getServer(), $this->m_cr->getUser(), $this->m_city);
+            if ($dbcity->isLowestIdForPlayer()) {
+               $rb = new ReportBuffer($this->m_cr->getDbconnect(), $this->m_city, $this->m_cr);
+               $rb->retrieve($cs);
+               $result = STATE_MONITOR_STORE_REPORT_BUFFER;
+            } else {
+               $result = STATE_IDLE;
+            }
+            break;
+            
+         case STATE_MONITOR_STORE_REPORT_BUFFER:
+            $ps = util_setParam("p2", 0);
+            if ($ps && is_string($ps)) {
+               $rb = new ReportBuffer($this->m_cr->getDbconnect(), $this->m_city, $this->m_cr);
+               $rb->add($ps);
             }
             $result = STATE_IDLE;
             break;

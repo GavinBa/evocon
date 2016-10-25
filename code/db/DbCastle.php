@@ -33,13 +33,15 @@ class DbCastle {
   
   public function create() {
 	  /* Query on server, player, city name */
-	  $result = $this->m_db->query("SELECT _id FROM castle where server=" . 
+	  $result = $this->m_db->query("SELECT _id,server,x,y FROM castle where server=" . 
 			$this->m_server . " AND x=" . $this->m_x . " AND y=" . $this->m_y);
 
          /* If not found then insert */
 	  if (! $result || $result->num_rows == 0) {
         $this->m_db->query("INSERT INTO castle (server, x, y) VALUES ('" . 
             $this->m_server . "', '" . $this->m_x . "', '" . $this->m_y . "')");
+     } else {
+        $this->m_db->query("UPDATE castle SET server=".$this->m_server.", x=".$this->m_x.", y=".$this->m_y." WHERE _id=". $this->getId());
      }
      if ($result) {
         $result->free();

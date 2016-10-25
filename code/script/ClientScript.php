@@ -65,10 +65,15 @@ class ClientScript {
      $this->addLine("city.script.debug = false");
   }
   
+  public function isOpen() {
+     return ($this->fp != NULL);
+  }
+  
   public function endFile() {
    fwrite($this->fp, 'echo "done"' . PHP_EOL);
    fwrite($this->fp, 'echo "' . util_getPageLoadTimeMsg() . '"' . PHP_EOL);
    fclose($this->fp);
+   $this->fp = NULL;
      
   }
   
@@ -79,6 +84,8 @@ class ClientScript {
           $this->addLine($buffer);
        }
        fclose($handle);
+    } else {
+       printf("Unable to open %s\n", $pathToScript);
     }
   }
   

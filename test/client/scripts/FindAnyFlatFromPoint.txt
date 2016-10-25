@@ -1,0 +1,12 @@
+// x = __x__
+// y = __y__
+
+t = []
+//x,y,maxdist,type,level,mindist
+fields = FindField(__x__,__y__,10,10,0,5)
+fields.forEach(CreateFunction("f,i,a","(GetDetailInfo(f) && t.push(GetDetailInfo(f)))"))
+if t.length < fields.length repeat
+v = { "fields" : t }
+echo "Found "+t.length+" flats"
+p2v = json_encode(v)
+

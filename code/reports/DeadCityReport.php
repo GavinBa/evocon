@@ -17,7 +17,14 @@ class DeadCityReport extends ScoutReport {
       if ($this->nogoForts()) {
          return false;
       }
+      if ($this->nogoCapture()) {
+         return false;
+      }
       return true;
+   }
+   
+   protected function nogoCapture() {
+      return ($this->getLoyalty() <= 5);
    }
    
    protected function nogoLoyalty() {
@@ -32,10 +39,16 @@ class DeadCityReport extends ScoutReport {
    }
    
    protected function nogoResources() {
-      if ($this->getWood() < 10000000) {
-         return true;
+      if ($this->getWood() > 5000000) {
+         return false;
       }
-      return false;
+      if ($this->getFood() > 50000000) {
+         return false;
+      }
+      if ($this->getIron() > 3000000) {
+         return false;
+      }
+      return true;
    }
    
    protected function nogoForts() {

@@ -31,6 +31,7 @@ class ScoutReport {
       $this->m_doc = new DOMDocument;
       $this->m_reportData = @simplexml_load_string($report);
       $this->parseTroops();
+      $this->parseFortifications();
    }
    
    public function getLoyalty() { return $this->m_reportData[0]->scoutReport->scoutInfo->attributes()["support"]; }
@@ -61,27 +62,29 @@ class ScoutReport {
 
    protected function parseFortifications() {
       $node = $this->m_reportData[0]->scoutReport->scoutInfo->fortifications;
-      foreach ($node->fortificationsType as $fort) {
-         $typeid = $fort->attributes()["typeId"];
-         $count = $fort->attributes()["count"];
-         switch ($typeid) {
-            case 14: // traps
-               $this->m_traps = $count;
-               break;
-            case 15: // abatis
-               $this->m_abatis = $count;
-               break;
-            case 16: // archer towers
-               $this->m_ats = $count;
-               break;
-            case 17: // rolling logs
-               $this->m_logs = $count;
-               break;
-            case 18: // trebuchet
-               $this->m_trebs = $count;
-               break;
-            default:
-               break;
+      if (isset($node->fortificationsType)) {
+         foreach ($node->fortificationsType as $fort) {
+            $typeid = $fort->attributes()["typeId"];
+            $count = $fort->attributes()["count"];
+            switch ($typeid) {
+               case 14: // traps
+                  $this->m_traps = $count;
+                  break;
+               case 15: // abatis
+                  $this->m_abatis = $count;
+                  break;
+               case 16: // archer towers
+                  $this->m_ats = $count;
+                  break;
+               case 17: // rolling logs
+                  $this->m_logs = $count;
+                  break;
+               case 18: // trebuchet
+                  $this->m_trebs = $count;
+                  break;
+               default:
+                  break;
+            }
          }
       }
    }
