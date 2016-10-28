@@ -71,11 +71,13 @@ class DeadCitiesTest extends TestCase
       $dbs = DbScout::fromExisting($this->dbc, new DbCity($this->dbc, Defaults::$server, Defaults::$player, $this->tc));
       $dbs->setState(SCOUT_IDLE);
       
+      /* Verify a null response is handled correctly. */
       $dc = new DeadCities($this->tc,$this->cr);
       $this->assertNotNull($dc);
       $_POST["p2"] = "{}";
       $ns = $dc->process($this->cs, STATE_DEADCITIES_CASTLES);
       $this->assertEquals($ns, STATE_IDLE);
+      
       // not a candidate (flag null)
       $_POST["p2"] = '{"fields":[{"honor":0,"lastUpdated":1477179845566,"flag":null,"canLoot":false,"furlough":false,"changeface":0,"coords":"810,810","userName":null,"canScout":true,"zoneName":"BAVARIA","canOccupy":true,"id":340560,"npc":true,"canTrans":false,"allianceName":null,"state":1,"playerLogoUrl":null,"canSend":false,"name":"Barbarians city","relation":2,"prestige":2500000}]}';
       $ns = $dc->process($this->cs, STATE_DEADCITIES_CASTLES);
@@ -107,38 +109,44 @@ class DeadCitiesTest extends TestCase
    }
    
    public function testProcessScouting() {
+      
+      /* Test the "has not arrived case" */
+
+      /*    reset the expected report time */
+      $scouter = Scouter::fromExisting($this->cr,$this->cs);
+      $scouter->setReportTime(0);
+      
       $dc = new DeadCities($this->tc,$this->cr);
       $this->assertNotNull($dc);
       $_POST["p2"] = '{"transit": 0, "attack": 15}';
       $ns = $dc->process($this->cs, STATE_DEADCITIES_SCOUTING);
       $this->assertEquals($ns, STATE_DEADCITIES_SCOUTING);
+      
+      /* Test the scout has arrived with (reportTime = 0) */
+      $_POST["p2"] = "{}";
       $dbs = DbScout::fromExisting($this->dbc, new DbCity($this->dbc, Defaults::$server, Defaults::$player, $this->tc));
+      $scouter->setReportTime(0);
       $this->assertNotNull($dbs);
       $dbs->setScoutTime($this->cr->getCtime());
-      $this->cr->setCtime($this->cr->getCtime() + 30000);
+      $this->cr->setCtime($this->cr->getCtime() + 25000);
       $dbs->setReportTime(0);
       $dc = new DeadCities($this->tc,$this->cr);
       $ns = $dc->process($this->cs, STATE_DEADCITIES_SCOUTING);
       $this->assertEquals($ns, STATE_SUSPEND);
-      // update the client request to indicate 5 seconds later
-      $this->cr->setCtime($this->cr->getCtime() + 5000);
-      // add a report update
+      $this->assertGreaterThan(0, $scouter->getReportTime());
+      
+      /* Test the report time is now fresh for our expected scout */
+      
+      // update the client request to indicate 10 seconds later
+      $this->cr->setCtime($this->cr->getCtime() + 10000);
+      
+      // add a report update which will be after expected time.
       $rb = new ReportBuffer($this->dbc,$this->tc,$this->cr);
       $rb->add(Defaults::$reportBufferOneLine);
+      
       $dc = new DeadCities($this->tc,$this->cr);
       $ns = $dc->process($this->cs, STATE_DEADCITIES_SCOUTING);
-      $this->assertEquals($ns, STATE_DEADCITIES_WAITSCOUT);
-      $dc = new DeadCities($this->tc,$this->cr);
-      $ns = $dc->process($this->cs, STATE_DEADCITIES_WAITSCOUT);
-      $this->assertEquals($ns, STATE_SUSPEND);
-      // advance client request time
-      $this->cr->setCtime($this->cr->getCtime() + 5000);
-      $dc = new DeadCities($this->tc,$this->cr);
-      $ns = $dc->process($this->cs, STATE_DEADCITIES_WAITSCOUT);
       $this->assertEquals($ns, STATE_DEADCITIES_REPORT);
-      $dc = new DeadCities($this->tc,$this->cr);
-      $ns = $dc->process($this->cs, STATE_DEADCITIES_REPORT);
-      $this->assertEquals($ns, STATE_IDLE);
       
       $rb = new ReportBuffer($this->dbc,$this->tc,$this->cr);
       $this->assertNotNull($rb->getLastReport(810,810));
@@ -152,7 +160,7 @@ class DeadCitiesTest extends TestCase
          if ($this->cs->isOpen()) {
             $this->cs->endFile();
          }
-         $this->cs->purge();
+//         $this->cs->purge();
       }
    }
 }

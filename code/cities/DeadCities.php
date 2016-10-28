@@ -21,7 +21,15 @@ class DeadCities extends StateProcessor {
       
       /* Create a Scouter instance and see if we have a target set. */
       $scouter = Scouter::fromExisting($this->m_cr,$cs);
-
+      
+      /* If waiting on a report and we are not processing the report then */
+      /* enter the wait state.                                            */
+      
+      if ($scouter && $scouter->isActiveScout($this->m_cr,$cs) &&
+          $scouter->getReportTime() > 0 && 
+          $state != STATE_DEADCITIES_REPORT) {
+         $state = STATE_DEADCITIES_WAITSCOUT;
+      }
       
       switch ($state) {
          case STATE_DEADCITIES:
@@ -98,6 +106,7 @@ class DeadCities extends StateProcessor {
             if ($rb->getLastUpdate() > $scouter->getReportTime()) {
                $result = STATE_DEADCITIES_REPORT;
             } else {
+               $cs->addEcho("Waiting on fresh reports...");
                $result = STATE_SUSPEND;
             }
             break;
@@ -120,6 +129,8 @@ class DeadCities extends StateProcessor {
                /* Now we need to wait for the report buffer to be updated */
                /* from this point.                                        */
                if ($scouter->getReportTime() == 0) {
+                  /* Mark the current request time and expect a report buffer */
+                  /* update after this time.                                  */
                   $scouter->setReportTime($this->m_cr->getCtime());
                   $result = STATE_SUSPEND;
                } else {

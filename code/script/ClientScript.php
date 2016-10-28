@@ -70,7 +70,6 @@ class ClientScript {
   }
   
   public function endFile() {
-   fwrite($this->fp, 'echo "done"' . PHP_EOL);
    fwrite($this->fp, 'echo "' . util_getPageLoadTimeMsg() . '"' . PHP_EOL);
    fclose($this->fp);
    $this->fp = NULL;

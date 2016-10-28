@@ -2,6 +2,9 @@
 
 require_once "lib/util.php";
 
+// NewCity
+//   If the account can spawn a new city then proceed through the steps...
+
 class NewCity extends StateProcessor {
 
    var $m_city;
@@ -20,13 +23,14 @@ class NewCity extends StateProcessor {
       
       switch ($state) {
          case STATE_NEWCITY:
-            return STATE_IDLE;
+            $cs->addEcho("No NEWCITY checking at the moment.");
+            return STATE_SUSPEND;
             /* Check if any city has already started building */
             if ($this->m_cr->getDbc()->getNewCity() == 0) {
                $cs->injectScript("client/scripts/CheckIfCanBuild.txt");
                $result = STATE_NEWCITY_CANBUILD;
             } else {
-               $result = STATE_IDLE;
+               $result = STATE_SUSPEND;
             }
             break;
             

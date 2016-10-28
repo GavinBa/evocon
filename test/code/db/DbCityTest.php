@@ -55,6 +55,17 @@ class DbCityTest extends TestCase
       $this->assertEquals($nc,$this->dbCity->getNewCity());
    }
    
+   public function testAnyCitySpawning() {
+      $nc = 0;      
+      $this->dbCity->setNewCity($nc);
+      $this->assertEquals($nc,$this->dbCity->getNewCity());
+      $this->assertFalse($this->dbCity->isAnyCitySpawning());
+      $nc = 1;      
+      $this->dbCity->setNewCity($nc);
+      $this->assertEquals($nc,$this->dbCity->getNewCity());
+      $this->assertTrue($this->dbCity->isAnyCitySpawning());
+   }
+   
    protected function tearDown() {
       if ($this->dbc) {
          db_disconnectDB($this->dbc);

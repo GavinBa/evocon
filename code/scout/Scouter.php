@@ -39,7 +39,7 @@ class Scouter {
    }
    
    public static function isActiveScout($cr,$cs) {
-      return DbScout::fromExisting($cr->getDbconnect(), $cr->getDbc())->hasTarget();
+      return ! DbScout::fromExisting($cr->getDbconnect(), $cr->getDbc())->isIdle();
    }
    
    public function setReportTime ($rt) {
@@ -57,7 +57,7 @@ class Scouter {
    }
    
    public function sendScout() {
-      $this->m_cs->addLine("scout " . $this->m_dbcastle->getX() . "," . $this->m_dbcastle->getY());
+      $this->m_cs->addLine("if city.rallySpotAvailable() scout " . $this->m_dbcastle->getX() . "," . $this->m_dbcastle->getY());
       /* Update the time it was sent with the client time */
       $this->m_dbscout->setScoutTime($this->m_cr->getCtime());
       $this->m_dbscout->setState(SCOUT_PENDING);

@@ -16,12 +16,11 @@ class StateMarket extends StateProcessor {
      
      switch ($state) {
         case STATE_MARKET:
-           $cs->addEcho("in market buy sell");
            $a = [ "server" => $this->m_cr->getServer(), 
                   "user" => $this->m_cr->getUser(), 
                   "city" => $this->m_city->getName()];
            $cs->injectScriptVars("client/scripts/BuySell.txt", $a);
-           $result = STATE_IDLE;
+           $result = STATE_SUSPEND;
            break;
         default:
            break;

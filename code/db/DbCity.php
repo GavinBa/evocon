@@ -123,6 +123,22 @@ class DbCity {
      return $newcity;
   }
   
+  // Check if any city is currently spawning a new city.
+  public function isAnyCitySpawning() {
+     $newcity = false;
+     $result = $this->m_db->query("SELECT newcity FROM city WHERE server=" .
+         $this->m_server . " AND player LIKE '" . $this->m_player .
+         "' AND newcity = 1");
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $newcity = true;
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $newcity;
+  }
+  
   public function setNewCity ($newcity) {
      $result = $this->m_db->query("UPDATE city SET newcity=" . $newcity . " WHERE id=" . $this->getId());
   }

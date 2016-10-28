@@ -18,7 +18,7 @@ if (is_null($dbc)) {
 }
 
 
-/* Get the city parameter */
+/* Get the city parameter - always required. */
 $p1 = util_setParam ("p1", 0);
 if (! is_string($p1)) {
 	print "no p1";
@@ -39,6 +39,7 @@ if ($userName == "none") {
 	return;
 }
 
+/* Get client time. */
 $cTime = util_setParam("time",0);
 
 
@@ -47,9 +48,6 @@ $json = json_decode($p1);
 if ($json == NULL) {
 	return;
 }
-
-/* Get the state parameter */
-//$state = util_setParam("state", 0);
 
 /* Create city object */
 $c = new City($json);
@@ -71,6 +69,7 @@ $cScript->startFile();
 
 /* Update the state */
 $s = new StateController($c, $cScript, $cReq);
+
 /* Advance to the next state */
 $ns = $s->nextState($state);
 $dbcity->setState($ns);

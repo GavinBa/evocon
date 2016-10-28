@@ -1,0 +1,3 @@
+echo 'food='
+echo "done"
+echo "Page generated in 0.247 seconds."

@@ -26,11 +26,11 @@ class IdleBuild extends StateProcessor {
          foreach (self::$builds as list($name,$abbr,$lvl)) {
             if ($this->buildTo($cs,$name,$abbr,$lvl) == STATE_IDLE) {
                $cs->addLine("echo 'Started build of " . $name . " to level " . $lvl . "'");
-               return STATE_IDLE;
+               return STATE_SUSPEND;
             }
          }
       }
-      return STATE_IDLE;
+      return STATE_SUSPEND;
    }
    
    protected function buildTo($cs,$bname,$babbr,$lvl) {

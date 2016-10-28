@@ -22,6 +22,7 @@ class StateController {
       $ps           = SLICE_MAX;
       $group        = getGroup($state);
       $initialSlice = $this->m_cr->getDbc()->getProcessSlice();
+      $market       = true;
       
       if ($this->m_city->isUnderAttack()) {
          $this->m_cs->addLine("echo 'under attack'");
@@ -29,6 +30,9 @@ class StateController {
             $group = $state = STATE_WAR;
          }
       }
+      
+      /* Loop until a state returns a transition to a state other */
+      /* than SUSPEND, or all states have been given time.        */
       
       while ($result == STATE_SUSPEND && $ps != $initialSlice) {
          
@@ -64,8 +68,13 @@ class StateController {
                break;
                
             case STATE_MARKET:
-               $p = new StateMarket($this->m_city,$this->m_cr);
-               $result = $p->process($this->m_cs,$state);
+               if ($market) {
+                  $p = new StateMarket($this->m_city,$this->m_cr);
+                  $result = $p->process($this->m_cs,$state);
+                  $market = false;
+               } else {
+                  $result = STATE_SUSPEND;
+               }
                break;
                
            default:
