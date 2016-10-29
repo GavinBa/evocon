@@ -66,6 +66,16 @@ class DbCityTest extends TestCase
       $this->assertTrue($this->dbCity->isAnyCitySpawning());
    }
    
+   public function testNewCityField() {
+      $this->assertNotNull($this->dbCity);
+      $fid = 0;      
+      $this->dbCity->setNewCityFieldId($fid);
+      $this->assertEquals($fid,$this->dbCity->getNewCityFieldId());
+      $fid = 456123;      
+      $this->dbCity->setNewCityFieldId($fid);
+      $this->assertEquals($fid,$this->dbCity->getNewCityFieldId());
+   }
+   
    protected function tearDown() {
       if ($this->dbc) {
          db_disconnectDB($this->dbc);

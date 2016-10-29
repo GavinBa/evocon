@@ -85,6 +85,7 @@ class StateController {
          if ($result == STATE_SUSPEND) {
              $ps = $this->getNextSlice();
              $group = $this->slice($ps);
+             $state = $group;
          }
       }
 

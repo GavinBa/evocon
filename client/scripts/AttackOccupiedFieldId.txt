@@ -1,0 +1,7 @@
+// AttackOccupiedFieldId.txt
+//    convertible params:
+//       owner  = __user__
+//       fieldid = __fieldid__
+echo 'attacking '+FieldIdToCoords(__fieldid__)+' any w:1k - owned by __user__ with ' && city.bestIdleAttackHero().name
+tr = GetTroops('w:1k')
+if city.rallySpotAvailable() && !city.notEnoughTroops(tr) && city.bestIdleAttackHero() && !city.bestIdleAttackHero().isMayor && city.trainingHeroName != city.bestIdleAttackHero().name execute "attack "+FieldIdToCoords(__fieldid__)+" !{city.trainingHeroName},any w:1k"

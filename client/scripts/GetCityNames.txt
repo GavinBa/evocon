@@ -1,0 +1,5 @@
+//GetCityNames.txt
+t = []
+cities.forEach(CreateFunction("x,i,a","t.push(x.cityManager.name)"))
+v = { "result" : t }
+p2v = json_encode(v)

@@ -1,0 +1,6 @@
+//GetCityCount.txt
+
+v = { "result" : cities.length }
+p2v = json_encode(v)
+
+
