@@ -43,6 +43,10 @@ class NewCity extends StateProcessor {
             $state = STATE_NEWCITY_CHECKCITYCNT;
          } else if ($nc == 4) {
             $state = STATE_NEWCITY_GETCITYNAMES;
+         } else if ($nc == 5) {
+            // we got here and our city name was not the default - so we are done.
+            $this->m_cr->getDbc()->setNewCity(0);
+            $this->m_cr->getDbc()->setNewCityFieldId(0);
          }
       }
       
@@ -62,7 +66,7 @@ class NewCity extends StateProcessor {
             
          case STATE_NEWCITY_CANBUILD:
             $p2 = util_setParam("p2", 0);
-            if (isset($p2)) {
+            if ($p2) {
                $p2json = json_decode($p2);
                if ($p2json != NULL && $p2json->result > 0) {
                   $cs->addLine("echo '-----I CAN BUILD----'" . PHP_EOL);

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <title>Dashboard for E:\neat\php</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/nv.d3.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!--[if lt IE 9]>
+  <script src="js/html5shiv.min.js"></script>
+  <script src="js/respond.min.js"></script>
+  <![endif]-->
+ </head>
+ <body>
+  <header>
+   <div class="container">
+    <div class="row">
+     <div class="col-md-12">
+      <ol class="breadcrumb">
+        <li><a href="index.html">E:\neat\php</a></li>
+        <li class="active">(Dashboard)</li>
+
+      </ol>
+     </div>
+    </div>
+   </div>
+  </header>
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Classes</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="classCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="classComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="code/newcity/NewCity.php.html#9">NewCity</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/buildings/buildings.php.html#3">Buildings</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#9">DeadCities</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#17">NewCityTest</a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#3">City</a></td><td class="text-right">14%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Class</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="code/newcity/NewCity.php.html#9">NewCity</a></td><td class="text-right">2162</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#9">DeadCities</a></td><td class="text-right">1560</td></tr>
+       <tr><td><a href="code/cities/city.php.html#3">City</a></td><td class="text-right">267</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#17">NewCityTest</a></td><td class="text-right">182</td></tr>
+       <tr><td><a href="code/buildings/buildings.php.html#3">Buildings</a></td><td class="text-right">42</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-12">
+     <h2>Methods</h2>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Coverage Distribution</h3>
+     <div id="methodCoverageDistribution" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Complexity</h3>
+     <div id="methodComplexity" style="height: 300px;">
+       <svg></svg>
+     </div>
+    </div>
+   </div>
+   <div class="row">
+    <div class="col-md-6">
+     <h3>Insufficient Coverage</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right">Coverage</th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="code/newcity/NewCity.php.html#21"><abbr title="NewCity::process">process</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#25"><abbr title="NewCityTest::setUp">setUp</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#34"><abbr title="NewCityTest::testConstructor">testConstructor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/newcity/NewCity.php.html#15"><abbr title="NewCity::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#64"><abbr title="City::isArmyFieldIdDirection">isArmyFieldIdDirection</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#48"><abbr title="City::getNumMarchingArmies">getNumMarchingArmies</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#52"><abbr title="City::getSelfArmies">getSelfArmies</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#56"><abbr title="City::isArmyFieldId">isArmyFieldId</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#39"><abbr title="NewCityTest::testNewCity">testNewCity</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#48"><abbr title="NewCityTest::testCanBuild">testCanBuild</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#151"><abbr title="NewCityTest::testRename">testRename</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#159"><abbr title="NewCityTest::purgeFiles">purgeFiles</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#166"><abbr title="NewCityTest::tearDown">tearDown</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#128"><abbr title="NewCityTest::testWaitOnFlat">testWaitOnFlat</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#97"><abbr title="NewCityTest::testBestFlat">testBestFlat</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#68"><abbr title="NewCityTest::testFindFlat">testFindFlat</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#80"><abbr title="NewCityTest::testFlats">testFlats</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#39"><abbr title="City::hasField">hasField</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#35"><abbr title="City::getFields">getFields</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#15"><abbr title="DeadCities::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#20"><abbr title="DeadCities::process">process</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/buildings/buildings.php.html#19"><abbr title="Buildings::getBuildingLevel">getBuildingLevel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/buildings/buildings.php.html#15"><abbr title="Buildings::getRallyLevel">getRallyLevel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/buildings/buildings.php.html#7"><abbr title="Buildings::__construct">__construct</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/buildings/buildings.php.html#11"><abbr title="Buildings::getInnLevel">getInnLevel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#182"><abbr title="DeadCities::isCandidate">isCandidate</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#187"><abbr title="DeadCities::addTargetCastle">addTargetCastle</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#23"><abbr title="City::isUnderAttack">isUnderAttack</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#27"><abbr title="City::getRallyLevel">getRallyLevel</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#19"><abbr title="City::getNumFieldsOwned">getNumFieldsOwned</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/city.php.html#15"><abbr title="City::setNameTestOnly">setNameTestOnly</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#196"><abbr title="DeadCities::addNeighbor">addNeighbor</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#206"><abbr title="DeadCities::timeToCheckPres">timeToCheckPres</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#210"><abbr title="DeadCities::get_http_response_code">get_http_response_code</abbr></a></td><td class="text-right">0%</td></tr>
+       <tr><td><a href="code/buildings/IdleBuild.php.html#55"><abbr title="IdleBuild::getBuildingLevel">getBuildingLevel</abbr></a></td><td class="text-right">80%</td></tr>
+       <tr><td><a href="code/buildings/IdleBuild.php.html#36"><abbr title="IdleBuild::buildTo">buildTo</abbr></a></td><td class="text-right">84%</td></tr>
+       <tr><td><a href="code/buildings/IdleBuild.php.html#22"><abbr title="IdleBuild::process">process</abbr></a></td><td class="text-right">88%</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+    <div class="col-md-6">
+     <h3>Project Risks</h3>
+     <div class="scrollbox">
+      <table class="table">
+       <thead>
+        <tr>
+         <th>Method</th>
+         <th class="text-right"><abbr title="Change Risk Anti-Patterns (CRAP) Index">CRAP</abbr></th>
+        </tr>
+       </thead>
+       <tbody>
+       <tr><td><a href="code/newcity/NewCity.php.html#21"><abbr title="NewCity::process">process</abbr></a></td><td class="text-right">2070</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#20"><abbr title="DeadCities::process">process</abbr></a></td><td class="text-right">870</td></tr>
+       <tr><td><a href="code/cities/city.php.html#64"><abbr title="City::isArmyFieldIdDirection">isArmyFieldIdDirection</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#182"><abbr title="DeadCities::isCandidate">isCandidate</abbr></a></td><td class="text-right">20</td></tr>
+       <tr><td><a href="code/cities/city.php.html#39"><abbr title="City::hasField">hasField</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="code/buildings/buildings.php.html#19"><abbr title="Buildings::getBuildingLevel">getBuildingLevel</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="code/cities/city.php.html#56"><abbr title="City::isArmyFieldId">isArmyFieldId</abbr></a></td><td class="text-right">12</td></tr>
+       <tr><td><a href="code/buildings/IdleBuild.php.html#36"><abbr title="IdleBuild::buildTo">buildTo</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#159"><abbr title="NewCityTest::purgeFiles">purgeFiles</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="test/code/newcity/NewCityTest.php.html#166"><abbr title="NewCityTest::tearDown">tearDown</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="code/cities/DeadCities.php.html#196"><abbr title="DeadCities::addNeighbor">addNeighbor</abbr></a></td><td class="text-right">6</td></tr>
+       <tr><td><a href="code/buildings/IdleBuild.php.html#22"><abbr title="IdleBuild::process">process</abbr></a></td><td class="text-right">4</td></tr>
+       <tr><td><a href="code/buildings/IdleBuild.php.html#55"><abbr title="IdleBuild::getBuildingLevel">getBuildingLevel</abbr></a></td><td class="text-right">3</td></tr>
+
+       </tbody>
+      </table>
+     </div>
+    </div>
+   </div>
+   <footer>
+    <hr/>
+    <p>
+     <small>Generated by <a href="https://github.com/sebastianbergmann/php-code-coverage" target="_top">php-code-coverage 4.0.1</a> using <a href="https://secure.php.net/" target="_top">PHP 5.6.26</a> with <a href="https://xdebug.org/">Xdebug 2.4.1</a> and <a href="https://phpunit.de/">PHPUnit 5.6.1</a> at Sun Oct 30 22:11:07 EDT 2016.</small>
+    </p>
+   </footer>
+  </div>
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+  <script src="js/bootstrap.min.js" type="text/javascript"></script>
+  <script src="js/holder.min.js" type="text/javascript"></script>
+  <script src="js/d3.min.js" type="text/javascript"></script>
+  <script src="js/nv.d3.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+$(document).ready(function() {
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#classCoverageDistribution svg')
+      .datum(getCoverageDistributionData([4,0,1,0,0,0,0,0,0,0,2,0], "Class Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart();
+    chart.tooltips(false)
+      .showControls(false)
+      .showLegend(false)
+      .reduceXTicks(false)
+      .staggerLabels(true)
+      .yAxis.tickFormat(d3.format('d'));
+
+    d3.select('#methodCoverageDistribution svg')
+      .datum(getCoverageDistributionData([34,0,0,0,0,0,0,0,0,3,2,9], "Method Coverage"))
+      .transition().duration(500).call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getCoverageDistributionData(data, label) {
+    var labels = [
+      '0%',
+      '0-10%',
+      '10-20%',
+      '20-30%',
+      '30-40%',
+      '40-50%',
+      '50-60%',
+      '60-70%',
+      '70-80%',
+      '80-90%',
+      '90-100%',
+      '100%'
+    ];
+    var values = [];
+    $.each(labels, function(key) {
+      values.push({x: labels[key], y: data[key]});
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Cyclomatic Complexity');
+
+    d3.select('#classComplexity svg')
+      .datum(getComplexityData([[91.489361702128,22,"<a href=\"code\/buildings\/IdleBuild.php.html#3\">IdleBuild<\/a>"],[0,6,"<a href=\"code\/buildings\/buildings.php.html#3\">Buildings<\/a>"],[0,39,"<a href=\"code\/cities\/DeadCities.php.html#9\">DeadCities<\/a>"],[14.814814814815,20,"<a href=\"code\/cities\/city.php.html#3\">City<\/a>"],[0,46,"<a href=\"code\/newcity\/NewCity.php.html#9\">NewCity<\/a>"],[95.833333333333,8,"<a href=\"test\/code\/buildings\/IdleBuildTest.php.html#15\">IdleBuildTest<\/a>"],[0,13,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#17\">NewCityTest<\/a>"]], 'Class Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  nv.addGraph(function() {
+    var chart = nv.models.scatterChart()
+      .showDistX(true)
+      .showDistY(true)
+      .showLegend(false)
+      .forceX([0, 100]);
+    chart.tooltipContent(function(key, y, e, graph) {
+      return '<p>' + graph.point.class + '</p>';
+    });
+
+    chart.xAxis.axisLabel('Code Coverage (in percent)');
+    chart.yAxis.axisLabel('Method Complexity');
+
+    d3.select('#methodComplexity svg')
+      .datum(getComplexityData([[100,1,"<a href=\"code\/buildings\/IdleBuild.php.html#18\">IdleBuild::__construct<\/a>"],[88.888888888889,4,"<a href=\"code\/buildings\/IdleBuild.php.html#22\">IdleBuild::process<\/a>"],[84.615384615385,6,"<a href=\"code\/buildings\/IdleBuild.php.html#36\">IdleBuild::buildTo<\/a>"],[80,3,"<a href=\"code\/buildings\/IdleBuild.php.html#55\">IdleBuild::getBuildingLevel<\/a>"],[100,5,"<a href=\"code\/buildings\/IdleBuild.php.html#64\">IdleBuild::getMinBuildingLevel<\/a>"],[100,3,"<a href=\"code\/buildings\/IdleBuild.php.html#78\">IdleBuild::getBuildingTotal<\/a>"],[0,1,"<a href=\"code\/buildings\/buildings.php.html#7\">Buildings::__construct<\/a>"],[0,1,"<a href=\"code\/buildings\/buildings.php.html#11\">Buildings::getInnLevel<\/a>"],[0,1,"<a href=\"code\/buildings\/buildings.php.html#15\">Buildings::getRallyLevel<\/a>"],[0,3,"<a href=\"code\/buildings\/buildings.php.html#19\">Buildings::getBuildingLevel<\/a>"],[0,1,"<a href=\"code\/cities\/DeadCities.php.html#15\">DeadCities::__construct<\/a>"],[0,29,"<a href=\"code\/cities\/DeadCities.php.html#20\">DeadCities::process<\/a>"],[0,4,"<a href=\"code\/cities\/DeadCities.php.html#182\">DeadCities::isCandidate<\/a>"],[0,1,"<a href=\"code\/cities\/DeadCities.php.html#187\">DeadCities::addTargetCastle<\/a>"],[0,2,"<a href=\"code\/cities\/DeadCities.php.html#196\">DeadCities::addNeighbor<\/a>"],[0,1,"<a href=\"code\/cities\/DeadCities.php.html#206\">DeadCities::timeToCheckPres<\/a>"],[0,1,"<a href=\"code\/cities\/DeadCities.php.html#210\">DeadCities::get_http_response_code<\/a>"],[100,1,"<a href=\"code\/cities\/city.php.html#7\">City::__construct<\/a>"],[100,1,"<a href=\"code\/cities\/city.php.html#11\">City::getName<\/a>"],[0,1,"<a href=\"code\/cities\/city.php.html#15\">City::setNameTestOnly<\/a>"],[0,1,"<a href=\"code\/cities\/city.php.html#19\">City::getNumFieldsOwned<\/a>"],[0,1,"<a href=\"code\/cities\/city.php.html#23\">City::isUnderAttack<\/a>"],[0,1,"<a href=\"code\/cities\/city.php.html#27\">City::getRallyLevel<\/a>"],[100,1,"<a href=\"code\/cities\/city.php.html#31\">City::getJson<\/a>"],[0,1,"<a href=\"code\/cities\/city.php.html#35\">City::getFields<\/a>"],[0,3,"<a href=\"code\/cities\/city.php.html#39\">City::hasField<\/a>"],[0,1,"<a href=\"code\/cities\/city.php.html#48\">City::getNumMarchingArmies<\/a>"],[0,1,"<a href=\"code\/cities\/city.php.html#52\">City::getSelfArmies<\/a>"],[0,3,"<a href=\"code\/cities\/city.php.html#56\">City::isArmyFieldId<\/a>"],[0,4,"<a href=\"code\/cities\/city.php.html#64\">City::isArmyFieldIdDirection<\/a>"],[0,1,"<a href=\"code\/newcity\/NewCity.php.html#15\">NewCity::__construct<\/a>"],[0,45,"<a href=\"code\/newcity\/NewCity.php.html#21\">NewCity::process<\/a>"],[100,1,"<a href=\"test\/code\/buildings\/IdleBuildTest.php.html#23\">IdleBuildTest::setUp<\/a>"],[100,1,"<a href=\"test\/code\/buildings\/IdleBuildTest.php.html#33\">IdleBuildTest::testConstructor<\/a>"],[91.666666666667,1,"<a href=\"test\/code\/buildings\/IdleBuildTest.php.html#42\">IdleBuildTest::testProcessBuildingActive<\/a>"],[91.666666666667,1,"<a href=\"test\/code\/buildings\/IdleBuildTest.php.html#56\">IdleBuildTest::testProcessBuildingInactive<\/a>"],[100,4,"<a href=\"test\/code\/buildings\/IdleBuildTest.php.html#71\">IdleBuildTest::tearDown<\/a>"],[0,1,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#25\">NewCityTest::setUp<\/a>"],[0,1,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#34\">NewCityTest::testConstructor<\/a>"],[0,1,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#39\">NewCityTest::testNewCity<\/a>"],[0,1,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#48\">NewCityTest::testCanBuild<\/a>"],[0,1,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#68\">NewCityTest::testFindFlat<\/a>"],[0,1,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#80\">NewCityTest::testFlats<\/a>"],[0,1,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#97\">NewCityTest::testBestFlat<\/a>"],[0,1,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#128\">NewCityTest::testWaitOnFlat<\/a>"],[0,1,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#151\">NewCityTest::testRename<\/a>"],[0,2,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#159\">NewCityTest::purgeFiles<\/a>"],[0,2,"<a href=\"test\/code\/newcity\/NewCityTest.php.html#166\">NewCityTest::tearDown<\/a>"]], 'Method Complexity'))
+      .transition()
+      .duration(500)
+      .call(chart);
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+  });
+
+  function getComplexityData(data, label) {
+    var values = [];
+    $.each(data, function(key) {
+      var value = Math.round(data[key][0]*100) / 100;
+      values.push({
+        x: value,
+        y: data[key][1],
+        class: data[key][2],
+        size: 0.05,
+        shape: 'diamond'
+      });
+    });
+
+    return [
+      {
+        key: label,
+        values: values,
+        color: "#4572A7"
+      }
+    ];
+  }
+});
+  </script>
+ </body>
+</html>

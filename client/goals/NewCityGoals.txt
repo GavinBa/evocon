@@ -1,119 +1,73 @@
 // NewCityGoals.txt
-config comfort:1,gate:1
-// config trade:1
-build c:1
-troop a:1,warr:1,wo:1,p:1,sw:1,cav:1,cata:1,ram:1,cp:1,s:1
-fortification trap:10,ab:10,at:1,r:10,rock:10
 
 
-reportstokeep 1 a:500 b:2 a:3800 a:6000
+#schedulepolicy 06:00 12:00
+config comfort:1
 comfortpolicy 15 21 popraise
-distancepolicy 10 15 10 15 15
-
-//traininghero eric 15 35 0
-
+distancepolicy 10 10 10 15 15
+// max distance _farm _build _npc5 _search medal _valley _map size
+#rallypolicy n:10:1 n:8 m:1
+#excludelist 111,222 123,456 654,321 222,111
+#traininghero your_best_atk_hero_name 300 1200 1
 config hero:10
-// 1 - rewards and levels only
-// 10 - keep 1 poli, rest attack, reward & level
-// 20 - keep 2 poli, rest attack, reward & level
-// 11 - keep 1 poli, 1 intel, rest attack, reward & level
-// 21 - keep 2 poli, 1 intel, rest attack, reward & level
-// guide:Hero
-
-config trainpol:1
-#config trainint:1
-config training:1
-config feastinghallspace:1
-
-keepcapturedheroes any:level>=100,base>=79|any:level>=150,base>=69|any:level>=200
-keepheroes eric,cherry,any:level>=50|any:base>=69
-config keepatthome:0
+config trainpol:0
+config trainint:1
+keepcapturedheroes any:base>=70
+keepcapturedheroes any:level>=100
+keepheroes any:level>=50
+keepheroes any:base>=69
+config keepatthome:1
 #nolevelheroes hero,names,or,string
 config fasthero:70
-#homeheroes 2
-
-///=======================================
-// npc building & farming goals
-///=======================================
-
 config npc:5
-#farmingpolicy 5 mindistance:1 maxdistance:10 mincycle:1 maxcycle:8
 #farmingpolicy 10 mindistance:1 maxdistance:5 cycle:1
-npctroops 5 b:400,t:500
+npctroops 5 b:400
 #npctroop 10 a:90000,wo:2000,warr:2000,s:4000
-npcheroes 5 !eric,armand,!cherry,devin,any:att>=65
-#npcheroes 5 any,!trainingheroname
+npcheroes 5 any,!trainingheroname
 #npcheroes 10 trainingheroname
-npctroop 10 a:90000,wo:2000,warr:2000,s:4000
-npclimits 10 a:93k
-npcheroes 10 cherry
-farmingpolicy 10 mindistance:1 maxdistance:6 cycle:4
-
 #npclimits 10 a:281k
-#config npclimit:100
 #npclist 5 xx1,yy1 xx2,yy2 xx3,yy3
-config farmingcycle:8.4
-#config farmingcyclemin:1
 #npcbounds 5 200 210 300 310
 config buildnpc:15
-npcbuildpolicy /level:5 /mindistance:1 /maxdistance:15
-npcbuildpolicy /level:10 /mindistance:1 /maxdistance:15
-npcbuildpolicy /level:8 /mindistance:2 /maxdistance:4
-
+npcbuildpolicy /level:5 /mindistance:4 /maxdistance:15
+npcbuildpolicy /level:10 /mindistance:1 /maxdistance:5
 //config acquireflats:2
 config abandonflats:1
-
-
-///=======================================
-/// resource management
-///=======================================
-
 taxpolicy 0 100
-#warehousepolicy 40 30 5 25
-
-//========================================
-// defense & combat goals
-//========================================
-
+warehousepolicy 60 20 10 10
 config warrules:0
 config wartown:0
 #wartownpolicy 06:00 12:00
 config attackgap:6
 config gate:0.2
 gatepolicy 2 0 2 0 0
-// 0.2 min=12s open/close gate time 
 // gatepolicy (peace) (atk) (sb) (both) (maint)
 // for each number above, choose either:0= bot decides, 1= open, 2= closed
-// guide:Gate
-// guide:GatePolicy
-
-defensepolicy /junktroop:1000 /usewarhorn:0 /usecorselet:0 /usepenicillin:0 /usetruce:87
+defensepolicy /junktroop:500 /usewarhorn:1 /usecorselet:1 /usepenicillin:1
 config embassy:1
 config defensecooldown:30
 config hiding:0.5
 #config nohealing:1
 
-///=======================================
-/// troop production 
-///=======================================
-
-config troopqueuetime:.25
+config troopqueuetime:1
 config troopincrement:1
 config troopsusereserved:0
 config troopsusepopmax:1 
-config troopidlequeuetime:15
-config troopdelbadque:0						  
-config reservedbarrack:1
+config troopidlequeuetime:0
+config troopdelbadque:1					  
+config reservedbarrack:0
 
 troop /idlequeuetime:2 /usereserved:1 p:1,sw:1,cav:1
 troop /idlequeuetime:2 wo:10,w:10,s:10,p:10,sw:10,a:10,c:10
 troop /idlequeuetime:2 wo:500
-troop wo:10k,w:10k,s:10k
 troop wo:1k,w:5k,s:10k,a:20k,sw:1k,p:1k,c:1k,cata:100,b:550,t:1k
-troop wo:5k,w:10k,s:75k,a:100k,sw:5k,p:5k,c:10k,cata:1k,b:5k,t:5k
-troop wo:10k,w:100k,s:100k,a:200k,sw:10k,p:10k,c:50k,cata:5k,b:25k,t:10k
+troop wo:5k,w:10k,s:50k,a:100k,sw:5k,p:5k,c:10k,cata:1k,b:5k,t:5k
+troop wo:10k,w:100k,s:100k,a:200k,sw:10k,p:10k,c:50k,cata:5k,b:10k,t:10k
 troop wo:50k,w:150k,s:150k,a:400k,sw:15k,p:15k,c:75k,cata:10k,b:30k,t:30k,r:10
 troop s:500k,a:1m,c:100k,cata:50k,b:50k,t:50k,r:10k,cp:50k
+// build these troops, 1st line 1st, 2nd line next, etc.
+// guide:Troop
+
 
 ///=======================================
 /// valley and medal hunting goals
@@ -121,14 +75,10 @@ troop s:500k,a:1m,c:100k,cata:50k,b:50k,t:50k,r:10k,cp:50k
 
 //config valleymin:1
 //config valley:10
-#valleyheroes !trainingheroname,any:attack>60
-// it's ok to use any hero with 60+ attack - except the traininghero - to acquire or farm a valley
-// guide:ValleyHeroes
-valleyheroes !eric,!lillian,!tracy,!anna,!cyril
-
-valleytroops 1 w:200
-valleytroops 2 w:500
-valleytroops 3 w:1k
+valleyheroes !trainingheroname,any:attack>60
+valleytroops 1 a:50
+valleytroops 2 a:100
+valleytroops 3 a:200
 valleytroops 4 a:400,sw:1,p:1,s:1,w:1
 valleytroops 5 a:800,sw:1,p:1,s:1,w:1,c:1
 valleytroops 6 a:1600,sw:1,p:1,s:1,w:1,c:1
@@ -136,74 +86,78 @@ valleytroops 7 a:10000,sw:1,p:1,s:1,w:1,c:1
 valleytroops 8 a:15000,sw:1,p:1,s:1,w:1,c:1
 valleytroops 9 a:20000,sw:1,p:1,s:1,w:1,c:1,b:1
 valleytroops 10 a:30000,sw:1,p:1,s:1,w:1,c:1,b:1
-// valleytroops {valley-level} troop-string
-// guide:ValleyTroops
-
 #valleylimit a:100k
-// don't attack valleys until we have at least 100k archers in the city
-// guide:ValleyLimit
-
-//config hunting:2
-// medal hunt on lvl 10 valleys (do not use with safevalleyfarming or config valleyfarming)
-// guide:Hunting
-
+#config hunting:10
 #huntingpos xxx,yyy
-// used with config hunting only
-// only medal hunt at this location (do not use with huntingtype)
-// guide:HuntingPos
-
-//huntingtype forest
-// used with config hunting only
-// only medal hunt at forests (do not use with huntingpos)
-// guide:HuntingType
-
+#huntingtype forest
 #safevalleyfarm 8,9,10
-// prescouts valleys of lvl 8, 9, and 10 for no-loss valley farming
-// can not use with config hunting, should not use with config valleyfarming
-// guide:SafeValleyFarm
-
-//config valleyfarming:10
+#config valleyfarming:10
 #valleyfarming 4 2 4 2 2 4
 // farm level 10 valleys for resources and medals
 // farm valleys of these types for this many miles: {forest} {desert} {hill} {swamp} {grasslands} {lakes}
-// can not use with config hunting, should not use with safevalleyfarming
-// guide:ValleyFarming
 
-
-///=======================================
-/// building goals
-///=======================================
-plan c:5:8,b:4:10,fh:5,r:5,a:5,m:3,s:5:40
-plan c:8:8,b:5:12,r:7,a:7,m:5,t:6,be:4,rs:1
-plan t:8,a:9,b:5:13,r:9,s:7:40,be:9,m:9
-
-// build building_name:level:quanity
-// guide:Build
-
-///=======================================
-/// research goals
-///=======================================
-
-
-// beware!! 
-// will automatically use mich scripts to upgrade requisite buildings 
-// only enable lvl10 research in a npc10 if you don't have scripts to spare
-// guide:Research
-
-
-///=======================================
-///    fortification build sequence 
-///=======================================
+// This builds a wood city, adjust to suit your tastes
+build c:2:1
+build f:1:1,s:1:1,i:1:1,q:1:1
+build inn:1
+build r:1,b:1:1
+build s:2:1,wh:1
+build m:1
+build be:1
+build q:2:1,i:3:1
+build w:1
+build t:2
+build a:1
+build t:3
+build e:1
+build f:5:1,st:1
+build c:1:6
+build c:5:6,s:5:40
+build a:3,be:3
+build fh:3,r:3
+build b:4:1
+build w:3
+build a:4,be:4,fh:4,r:4
+build b:5:1
+build t:4,w:4
+build m:3
+build b:9:1
+build rs:1
+build a:5,be:5,fh:5,r:5
+// Careful, this will pull you out of bp.. :)
+build t:5,w:5
+build a:6,be:6,fh:6,r:6
+build b:9:2
+build rs:3
+build t:6,w:6
+build c:6:6,s:6:40
+build rs:5
+build a:7,be:7,fh:7,r:7
+build b:9:3,b:4:14
+build t:7,w:7
+build c:7:6,s:7:40
+build a:8,be:8,fh:8,r:8
+build b:6:14
+build t:8,w:8
+build c:8:6,s:8:40
+build a:9,be:9,fh:9,r:9
+build b:9:14
+build r:10
+build t:9,w:9
+build c:9:6,s:9:40
+build w:10
+build ?met:10,w:10?ws:0:0
+build e:9,m:9
+build fh:10
+build t:10
+build ?wh:1:1?wh:9:1
+build ?ho:7?rs:10
+// remove the st:1 and q:1:1 and q:2:1 lines up near the start or these could stick you in a build/demo loop!
+build ?mas:10,w:10?q:0:0
+build ?ho:10?st:0:0
 
 config fortsusereserved:0 
-// percentage of resource reserves (1 = 100%, 0.5 = 50%, etc.) to be used for wall builds
-// warning this can send you into refuge if you allow full reserved food to be used carelessly!
-// guide:FortsUseReserved
-
 config wallqueuetime:0.5
-// queue 30 minute wall builds
-// guide:WallQueueTime
-
 fortification trap:1,ab:1
 fortification trap:27,ab:9
 fortification trap:30,ab:10,at:1
@@ -219,12 +173,6 @@ fortification trap:1200,ab:1600,at:8000,tre:300
 fortification tre:5000
 // guide:Fortification
 
-
-///=======================================
-///  resource & troop transfers
-///=======================================
-
-
 requestresources any gold 50m 200m 5m c
 requestresources any wood 1m 3m 1m wo
 requestresources any food 5m 10m 1m wo
@@ -235,12 +183,6 @@ config wartown:0
 requesttroops any t 2000 3k 500 500
 requesttroops any b 4000 2k 400 800
 requesttroops c a 98k 100k 5k 10k
-
-
-
-plan c:5:8,b:4:10,fh:5,r:5,a:5,m:3,s:5:40
-plan c:8:8,b:5:12,r:7,a:7,m:5,t:6,be:4,rs:1
-plan t:8,a:9,b:5:13,r:9,s:7:40,be:9,m:9
 
 
 requestresources any g 3m 50m 500k 1m

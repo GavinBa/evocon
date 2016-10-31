@@ -6,4 +6,4 @@ if [[ $# -ne 1 ]]; then
    exit 1
 fi
 
-phpunit --verbose --include-path ".." --bootstrap data/Defaults.php -c PHPUnitConfig.xml $1
+phpunit --verbose --coverage-html ./coverage-html --include-path ".." --bootstrap data/Defaults.php -c PHPUnitConfig.xml $1

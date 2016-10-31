@@ -53,7 +53,7 @@ class DeadCities extends StateProcessor {
 
             $p2 = util_setParam("p2", 0);
             $p2json = json_decode($p2);
-            if (isset($p2json->fields)) {
+            if (isset($p2json->canScout) && $p2json->canScout && isset($p2json->fields)) {
                $cs->addLine("echo 'Found ".count($p2json->fields)." castles.'");
                
                foreach ($p2json->fields as $field) {
@@ -96,6 +96,10 @@ class DeadCities extends StateProcessor {
                         }
                      }
                   }
+               }
+            } else {
+               if (isset($p2json->canScout) && !$p2json->canScout) {
+                  $cs->addEcho("Cannot scout due to no scouts");
                }
             }
             break;

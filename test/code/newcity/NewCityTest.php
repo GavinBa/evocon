@@ -43,9 +43,6 @@ class NewCityTest extends TestCase
       $this->cr->getDbc()->setNewCity(0);
       $ns = $nc->process($this->cs,STATE_NEWCITY);
       $this->assertEquals($ns,STATE_NEWCITY_CANBUILD);
-      $this->cr->getDbc()->setNewCity(1);
-      $ns = $nc->process($this->cs,STATE_NEWCITY);
-      $this->assertEquals($ns,STATE_SUSPEND);
    }
    
    public function testCanBuild() {
@@ -61,6 +58,9 @@ class NewCityTest extends TestCase
       $ns = $nc->process($this->cs,STATE_NEWCITY_CANBUILD);
       $this->assertEquals($ns,STATE_NEWCITY_FINDFLAT);
       $_POST["p2"] = NULL;
+      $ns = $nc->process($this->cs,STATE_NEWCITY_CANBUILD);
+      $this->assertEquals($ns,STATE_IDLE);
+      unset($_POST["p2"]);
       $ns = $nc->process($this->cs,STATE_NEWCITY_CANBUILD);
       $this->assertEquals($ns,STATE_IDLE);
    }
@@ -103,7 +103,15 @@ class NewCityTest extends TestCase
       $_POST["p2"] = '{}';
       $ns = $nc->process($this->cs,STATE_NEWCITY_BESTFLAT);
       $this->assertEquals($ns,STATE_SUSPEND);
+      // reset newcity state
+      $this->cr->getDbc()->setNewCity(0);
+      $_POST["p2"] = '{ "result": 123456, "isOwned": 1, "canAttack": 1, "user":"test"}';
+      $ns = $nc->process($this->cs,STATE_NEWCITY_BESTFLAT);
+      $this->assertEquals($ns,STATE_SUSPEND);
+      $this->assertEquals(1,$this->cr->getDbc()->getNewCity());
       $_POST["p2"] = '{ "result": 123456, "isOwned": 1, "canAttack": 1, "user":"notme"}';
+      // reset newcity state
+      $this->cr->getDbc()->setNewCity(0);
       $ns = $nc->process($this->cs,STATE_NEWCITY_BESTFLAT);
       $this->assertEquals($ns,STATE_SUSPEND);
       $this->assertEquals(2,$this->cr->getDbc()->getNewCity());
@@ -122,7 +130,8 @@ class NewCityTest extends TestCase
       $this->assertNotNull($nc);
       $this->cr->getDbc()->setNewCity(1);
       $ns = $nc->process($this->cs,STATE_NEWCITY);
-      $this->assertEquals($ns,STATE_SUSPEND);
+      $this->assertEquals($ns,STATE_NEWCITY_CHECKCITYCNT);
+      $this->assertEquals(3,$this->cr->getDbc()->getNewCity());
       $this->cr->getDbc()->setNewCity(2);
       $this->cr->getDbc()->setNewCityFieldId(352567);
       $ns = $nc->process($this->cs,STATE_NEWCITY);
@@ -139,7 +148,14 @@ class NewCityTest extends TestCase
       $this->assertEquals(0,$this->cr->getDbc()->getNewCityFieldId());
    }
    
-  
+   public function testRename() {
+      $this->tc->setNameTestOnly("Flat");
+      $nc = new NewCity($this->tc, $this->cr, $this->cs);
+      $this->assertNotNull($nc);
+      $ns = $nc->process($this->cs,STATE_NEWCITY_WAITONFLAT);
+      $this->assertEquals($ns,STATE_IDLE);
+   }
+   
    protected function purgeFiles() {
       if ($this->cs->isOpen()) {
          $this->cs->endFile();

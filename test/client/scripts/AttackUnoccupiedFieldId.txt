@@ -1,0 +1,7 @@
+// AttackUnoccupiedFieldId.txt
+//    convertible params:
+//       fieldid = __fieldid__
+//       troopstr = __troopstr__
+echo 'attacking '+FieldIdToCoords(__fieldid__)+' any w:1k - unowned with ' && city.bestIdleAttackHero().name
+tr = GetTroops('__troopstr__')
+if city.rallySpotAvailable() && !city.notEnoughTroops(tr) && city.bestIdleAttackHero() && !city.bestIdleAttackHero().isMayor && city.trainingHeroName != city.bestIdleAttackHero().name execute "attack "+FieldIdToCoords(__fieldid__)+" !{city.trainingHeroName},any __troopstr__"

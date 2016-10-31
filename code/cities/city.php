@@ -12,6 +12,10 @@ class City {
 	  return $this->m_city->name;
   }  
   
+  public function setNameTestOnly($s) {
+     $this->m_city->name = $s;
+  }
+  
   public function getNumFieldsOwned() {
      return count($this->m_city->castle->fieldsArray);
   }

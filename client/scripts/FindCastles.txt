@@ -8,5 +8,6 @@ t = []
 fields = FindField(__x__,__y__,__d__,GetFieldType("castle"),0,1)
 fields.forEach(CreateFunction("f,i,a","GetDetailInfo(f) && t.push(GetDetailInfo(f))"))
 if t.length < fields.length repeat
-v = { "fields" : t }
+tr = GetTroops("s:10")
+v = { "fields" : t , "canScout" : !city.notEnoughTroops(tr) }
 p2v = json_encode(v)

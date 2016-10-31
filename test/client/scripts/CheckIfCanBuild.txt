@@ -1,5 +1,6 @@
-// check title (player.playerInfo.titleId) (0-9)
-// get number of cities (cities.length)
+//CheckIfCanBuild.txt
+//   check title (player.playerInfo.titleId) (0-9)
+//   get number of cities (cities.length)
 x = 0
 if player.playerInfo.titleId >= cities.length x = 1
 v = { "result" : x}

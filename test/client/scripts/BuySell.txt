@@ -13,6 +13,5 @@ set gamt m_city.cityManager.resource.gold
 
 if city.tradesArray.length > 0 execute "canceltrade " + city.tradesArray[0].id
 POST "http://192.168.1.77:8000/code/market/buysell.php" {iron:%iamt%,wood:%wamt%,stone:%samt%,gold:%gamt%,food:%famt%,riron:max(city.reservedResource.iron,p.MINRESIRON),rwood:max(city.reservedResource.wood,p.MINRESWOOD),rstone:max(city.reservedResource.stone,p.MINRESSTONE),rgold:max(city.reservedResource.gold,p.MINRESGOLD),rfood:max(city.reservedResource.food,p.MINRESFOOD),foodrate:(city.resource.food.increaseRate - city.resource.troopCostFood),avgSpan:p.AVGSPAN,troopres:p.TROOPRESFACTOR,server:'__server__',player:'__user__',city:'__city__',ranking:player.playerInfo.ranking,citytype:p.CITYTYPE,buyAmt:p.BASEBUYAMT}
-echo $result
 execute $result
-label EOS
+label BUYSELL_EOS

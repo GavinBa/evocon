@@ -63,7 +63,7 @@ class DeadCitiesTest extends TestCase
       $fp = $this->cs->getFullPath();
       printf("Checking on file %s\n", $fp);
       $lines = file($fp);
-      $this->assertCount(27,$lines);
+      $this->assertCount(26,$lines);
    }
    
    public function testProcessCastles() {
@@ -103,7 +103,7 @@ class DeadCitiesTest extends TestCase
       $dbn = new DbNeighbors($this->dbc, Defaults::$server, 
                             Defaults::$player, $this->tc, $c->getId());
       $this->cr->setCtime((string)($dbn->getLastCheck() + 2800000));
-      $_POST["p2"] = '{"fields":[{"honor":0,"lastUpdated":1477179845566,"flag":"Test","canLoot":false,"furlough":false,"changeface":0,"coords":"810,810","userName":null,"canScout":true,"zoneName":"BAVARIA","canOccupy":true,"id":340560,"npc":true,"canTrans":false,"allianceName":null,"state":1,"playerLogoUrl":null,"canSend":false,"name":"Barbarians city","relation":2,"prestige":2500000}]}';
+      $_POST["p2"] = '{"fields":[{"honor":0,"lastUpdated":1477179845566,"flag":"Test","canLoot":false,"furlough":false,"changeface":0,"coords":"810,810","userName":null,"canScout":true,"zoneName":"BAVARIA","canOccupy":true,"id":340560,"npc":true,"canTrans":false,"allianceName":null,"state":1,"playerLogoUrl":null,"canSend":false,"name":"Barbarians city","relation":2,"prestige":2500000}], "canScout" : "true"}';
       $ns = $dc->process($this->cs, STATE_DEADCITIES_CASTLES);
       $this->assertEquals($ns, STATE_DEADCITIES_SCOUTING);
    }
