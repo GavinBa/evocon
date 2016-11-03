@@ -48,6 +48,9 @@ class DeadCityReport extends ScoutReport {
       if ($this->getIron() > 3000000) {
          return false;
       }
+      if ($this->getGold() > 5000000) {
+         return false;
+      }
       return true;
    }
    

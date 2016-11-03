@@ -9,7 +9,7 @@ class AttackDeadCity {
    
    public function __construct($city,$cr,$report) {
       if (! is_a($report, "DeadCityReport")) {
-         throw new Exception();
+         throw new Exception("Not a DeadCityReport");
       }
       $this->m_dcr = $report;
       $this->m_city = $city;

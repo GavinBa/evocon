@@ -49,7 +49,7 @@ class StateController {
                break;
                
             case STATE_WAR:
-               $result = STATE_IDLE;
+               $result = STATE_SUSPEND;
                break;
                
             case STATE_NEWCITY:

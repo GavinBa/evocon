@@ -1,0 +1,7 @@
+//FindNpcsLevel5.txt
+// troops = __troops__
+//city.getCarryingLoad(GetTroops("t:"+city.troop.carriage+",wo:"+city.troop.peasants+",c:"+city.troop.lightCavalry
+
+x = city.getCarryingLoad(GetTroops(__troops__))
+v = { "result" : x }
+p2v = json_encode(v)

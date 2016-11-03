@@ -76,6 +76,22 @@ class ClientScript {
      
   }
   
+  public function dumpFileToStdout() {
+     if ($this->isOpen()) {
+        printf("Client file (" . $this->getFilename() . " is still open.\n");
+        return;
+     }
+     $myFp = fopen($this->getFullPath(), 'r');
+     if ($myFp != NULL) {
+        while (($buffer = fgets($myFp, 4096)) !== false) {
+           printf("%s", $buffer);
+        }
+        fclose($myFp);
+     } else {
+        printf("Unable to open: " . $this->getFilename() . "\n");
+     }
+  }
+  
   public function injectScript($pathToScript) {
     $handle = @fopen($pathToScript, "r");
     if ($handle) {

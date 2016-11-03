@@ -18,6 +18,7 @@ define("STATE_MONITOR_REPORT_BUFFER",       0x00000103);
 define("STATE_MONITOR_STORE_REPORT_BUFFER", 0x00000104);
 
 /* War states */
+define("STATE_WAR_CARRYLOAD",             0x00000201);
 
 /* Build City states */
 define("STATE_NEWCITY_CANBUILD",          0x00000401);

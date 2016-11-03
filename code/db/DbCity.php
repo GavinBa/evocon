@@ -192,6 +192,40 @@ class DbCity {
      $result = $this->m_db->query("UPDATE city SET newcityfid=" . $fid . " WHERE id=" . $this->getId());
   }
   
+  public function isUnderAttack() {
+     $ua = false;
+     $result = $this->m_db->query("SELECT underAttack FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $ua = ($row["underAttack"] > 0);
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $ua;
+  }
+  
+  public function setUnderAttack($ua) {
+     $result = $this->m_db->query("UPDATE city SET underAttack='" . $ua . "' WHERE id=" . $this->getId());
+  }
+  
+  public function getResProfile() {
+     $rpi = 0;
+     $result = $this->m_db->query("SELECT resprofile_idx FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $rpi = ($row["resprofile_idx"] > 0);
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $rpi;
+  }
+  
+  public function setResProfile($rpi) {
+     $result = $this->m_db->query("UPDATE city SET resprofile_idx='" . $rpi . "' WHERE id=" . $this->getId());
+  }
+  
 }
 
 ?>

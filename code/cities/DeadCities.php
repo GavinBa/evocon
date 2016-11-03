@@ -161,8 +161,10 @@ class DeadCities extends StateProcessor {
             $url = $rb->getUrlFromReport($rpt);
             if (strlen($url) > 0 && $this->get_http_response_code($url) == "200") {
                $xml = file_get_contents($rb->getUrlFromReport($rpt));
-               $sr = new ScoutReport($xml);
+               $sr = new DeadCityReport($xml);
                $cs->addLine("echo 'food=".$sr->getFood()."'");
+               $adc = new AttackDeadCity($this->m_city,$this->m_cr,$sr);
+               $adc->attack($cs);
             } else {
                $cs->addLine("echo 'No URL from report buffer: " . $url . "'");
             }
