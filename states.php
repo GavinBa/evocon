@@ -9,6 +9,7 @@ define("STATE_NEWCITY",                   0x00000400);
 define("STATE_IDLEBUILDS",                0X00000800);
 define("STATE_DEADCITIES",                0x00001000);
 define("STATE_MARKET",                    0x00002000);
+define("STATE_DEVELOPING",                0x00004000);
 define("STATE_GROUP_MASK",                0xFFFFFF00);
 
 /* Monitor States */

@@ -4,17 +4,20 @@ require_once "code/states/StateMonitor.php";
 require_once "code/newcity/NewCity.php";
 require_once "code/buildings/IdleBuild.php";
 require_once "code/cities/DeadCities.php";
+require_once "code/cities/DevelopmentMonitor.php";
 require_once "code/market/Market.php";
 
 class StateController {
   var $m_city;
   var $m_cs;
   var $m_cr;
+  var $m_devmon;
   
   public function __construct($city, $cs, $cr) {
 	$this->m_city = $city;
-   $this->m_cs = $cs;
-   $this->m_cr = $cr;
+   $this->m_cs   = $cs;
+   $this->m_cr   = $cr;
+   $this->m_devmon = new DevelopmentMonitor($city, $cr, $cr->getDbc());
   }
   
    public function nextState($state) {
@@ -28,6 +31,12 @@ class StateController {
          $this->m_cs->addLine("echo 'under attack'");
          if ($group != STATE_WAR) {
             $group = $state = STATE_WAR;
+         }
+      }
+      
+      if ($group != STATE_WAR) {
+         if ($this->m_devmon->isMonitoring()) {
+            $group = STATE_DEVELOPING;
          }
       }
       
@@ -75,6 +84,12 @@ class StateController {
                } else {
                   $result = STATE_SUSPEND;
                }
+               break;
+               
+            case STATE_DEVELOPING:
+               $result = STATE_IDLE;
+               $this->m_cs->addEcho("\\n\\nDeveloping!!!\\n\\n");
+               $this->m_devmon->process($this->m_cs);
                break;
                
            default:

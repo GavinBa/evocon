@@ -1,0 +1,70 @@
+# Development Goals - Stage # 02
+
+# start hero management
+config hero:11
+
+# Get res fields to minimum levels
+build f:5,q:3,i:3,s:3:13
+# 
+
+# Basic goals from existing city
+reportstokeep 1 a:500 b:2 a:3800 a:6000
+distancepolicy 10 15 10 15 15
+taxpolicy 0 100
+config training:0
+config trainint:0
+config feastinghallspace:0
+keepcapturedheroes any:level>=100,base>=79|any:level>=150,base>=69|any:level>=200
+keepheroes any:level>=50|any:base>=69
+config keepatthome:0
+config npc:5
+config nomayor:0
+nolevelheroes violet
+config fasthero:70
+config attackgap:6
+config gate:0.2
+gatepolicy 2 0 2 0 0
+defensepolicy /junktroop:1000 /usewarhorn:0 /usecorselet:0 /usepenicillin:0
+config embassy:1
+config defensecooldown:30
+config hiding:0.5
+config troopqueuetime:.25
+config troopincrement:1
+config troopsusereserved:0
+config troopsusepopmax:1 
+config troopidlequeuetime:15
+config troopdelbadque:1						  
+config reservedbarrack:0
+
+config fortsusereserved:0 
+config wallqueuetime:0.5
+fortification trap:1,ab:1
+fortification trap:100,ab:100,at:100
+
+config valleymin:1
+config valley:4
+
+valleyheroes any
+valleytroops 1 a:50
+valleytroops 2 a:100
+valleytroops 3 a:200
+valleytroops 4 a:400,sw:1,p:1,s:1,w:1
+valleytroops 5 a:800,sw:1,p:1,s:1,w:1,c:1
+valleytroops 6 a:1600,sw:1,p:1,s:1,w:1,c:1
+valleytroops 7 a:10000,sw:1,p:1,s:1,w:1,c:1
+valleytroops 8 a:15000,sw:1,p:1,s:1,w:1,c:1
+valleytroops 9 a:20000,sw:1,p:1,s:1,w:1,c:1,b:1
+valleytroops 10 a:30000,sw:1,p:1,s:1,w:1,c:1,b:1
+
+
+build c:4:8
+build b:2:12
+build fh:3,fo:2,ws:2
+build w:2,s:3:16
+build be:3
+
+research ag:1,lu:1,mas:1,mi:1
+research in:1,mt:1,ir:1
+research ag:2,lu:2,mas:2,mi:2
+research met:1,lo:1
+research com:1,met:2,in:2,mt:2,ir:2,lo:2

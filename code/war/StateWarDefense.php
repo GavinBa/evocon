@@ -38,6 +38,15 @@ class StateWarDefense extends StateProcessor {
             break;
             
          case STATE_WAR_CARRYLOAD:
+            $p2 = util_setParam("p2", 0);
+            $p2json = json_decode($p2);
+            if ($p2 && isset($p2json->result)) {
+               $cload = $p2json->result;
+               
+               // prepare to send valuables elsewhere (iron,wood)
+               // for the rest figure out current prices and prioritize
+               
+            }
             
             $result = STATE_SUSPEND;
             break;

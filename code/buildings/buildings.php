@@ -16,6 +16,10 @@ class Buildings {
      return $this->getBuildingLevel("Rally Spot");
   }
   
+  public function getTownHallLevel() {
+     return $this->getBuildingLevel("Town Hall");
+  }
+  
   public function getBuildingLevel($bStr) {
 	  foreach($this->m_city->getJson()->buildings as $myBuilding) {
 		  if ($myBuilding->name == $bStr) {
@@ -24,5 +28,18 @@ class Buildings {
 	  }
 	  return 0;
   }
+
+  public function getMinBuildingLevel($bStr) {
+     $result = 0;
+	  foreach($this->m_city->getJson()->buildings as $myBuilding) {
+		  if ($myBuilding->name == $bStr) {
+           if ($myBuilding->level < $result || $result == 0) {
+              $result = $myBuilding->level;
+           }
+		  }
+	  }
+	  return $result;
+  }
+  
 }
 ?>

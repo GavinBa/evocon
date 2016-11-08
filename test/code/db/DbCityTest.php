@@ -1,8 +1,9 @@
 <?php
 use PHPUnit\Framework\TestCase;
 
-require "code/cities/city.php";
-require "code/db/DbCity.php";
+require_once "code/cities/city.php";
+require_once "code/cities/Development.php";
+require_once "code/db/DbCity.php";
 require_once "lib/db.php";
 
 
@@ -74,6 +75,25 @@ class DbCityTest extends TestCase
       $fid = 456123;      
       $this->dbCity->setNewCityFieldId($fid);
       $this->assertEquals($fid,$this->dbCity->getNewCityFieldId());
+   }
+   
+   public function testDevelopment() {
+      $this->assertNotNull($this->dbCity);
+      $this->dbCity->setDevelopment("Grown");
+      $dev = $this->dbCity->getDevelopment();
+      $this->assertSame($dev,"Grown");
+      $this->assertFalse(Development::isUnderDevelopment($dev));
+      $this->dbCity->setDevelopment("Hatchling");
+      $dev = $this->dbCity->getDevelopment();
+      $this->assertTrue(Development::isHatchling($dev));
+      $this->assertTrue(Development::isUnderDevelopment($dev));
+      $this->dbCity->setDevelopment("Nestling");
+      $dev = $this->dbCity->getDevelopment();
+      $this->assertTrue(Development::isNestling($dev));
+      $this->dbCity->setDevelopment("Fledgling");
+      $dev = $this->dbCity->getDevelopment();
+      $this->assertTrue(Development::isFledgling($dev));
+      $this->assertFalse(Development::isGrown($dev));
    }
    
    protected function tearDown() {

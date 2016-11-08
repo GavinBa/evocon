@@ -1,0 +1,305 @@
+echo 'Starting build process - STAGE 01'
+//echo 'Turning on debug'
+//city.script.debug = true
+
+if city.getActiveBuilding() echo 'Waiting on active building...'
+if city.getActiveBuilding() repeat
+
+s = 0
+echo "step {++s}"
+# complete daily quest
+if !city.hasBuilding(1) create cottage
+echo "step {++s}"
+# wait
+completequests routine
+echo "step {++s}"
+# bg, amulet, pop 30 food 200 lumber 1000 stone 200 iron 100
+#spin wheel
+useitem amulet
+completequests routine
+# bg, amulet, pop 20, food 300, lumber 1500, stone 300, iron 150
+completequests routine
+# pres 10, pop 10, gold 100
+echo "step {++s}"
+
+# get newbies package
+useitem Newbies_Package
+sleep 3
+completequests routine
+# pres 100, gold 10000
+echo "step {++s}"
+
+if !city.hasBuilding(1,2) upgrade c
+#wait
+sleep 3
+completequests routine
+# pop 50, food 500, lumber 2000, stone 500, iron 500
+if !city.hasBuilding(7,1) create farm
+completequests routine
+# bg, food 100, lumber 500, stone 500, iron 300
+echo "step {++s}"
+
+if !city.hasBuilding(4,1) create s
+completequests routine
+# bg, food 200, lumber 200, stone 500, iron 500
+if !city.hasBuilding(5,1) create q
+completequests routine
+# bg, food 300, lumber 750, stone 300, iron 500
+echo "step {++s}"
+
+if !city.hasBuilding(6,1) create i
+completequests routine
+# bg, food 500, lumber 800, stone 750, iron 500
+echo "step {++s}"
+
+config hero:1,nomayor:1
+production 100 100 100 100
+completequests routine
+settaxrate 20
+completequests routine
+echo "step {++s}"
+
+changeflag "galf"
+completequests routine
+# national flag, gold 1000
+echo "step {++s}"
+
+if !city.hasBuilding(21) create inn
+sleep 2
+completequests routine
+# food 500, lumber 2000, stone 1000, iron 500
+echo "step {++s}"
+
+if !city.hasBuilding(29) create r
+completequests routine
+# food 500, lumber 1000, stone 2000, iron 500
+echo "step {++s}"
+
+if !city.hasBuilding(4,2) upgrade s
+# use speedup (free)
+completequests routine
+# food 1000, lumber 1000, stone 1000, iron 1000
+echo "step {++s}"
+
+if !city.hasBuilding(7,2) upgrade f
+if !city.hasBuilding(7,3) upgrade f
+if !city.hasBuilding(7,4) upgrade f
+if !city.hasBuilding(7,5) upgrade f
+#wait
+if !city.hasBuilding(7,5) echo 'waiting on farm level 5'
+if !city.hasBuilding(7,5) repeat
+echo "step {++s}"
+
+completequests routine
+# plowshare, food 1000
+# food 1000, lumber 5000, stone 3000, iron 2500
+# pres 20, pop 20, gold 200
+
+if !city.hasBuilding(27) create fh
+completequests routine
+# gold 1000, food 1000, lumber 3000, stone 1500, iron 1000
+echo "step {++s}"
+
+config hero:11
+# completequests
+# gold 1000
+echo "step {++s}"
+
+if !city.hasBuilding(23) create /speedup="Beginner Guidelines" m
+completequests
+# 5cents, food 1500, lumber 1500, stone 1500, iron 1500
+echo "step {++s}"
+
+sell iron 100
+completequests routine
+#gold 1000
+echo "step {++s}"
+
+if !city.hasBuilding(20) create st
+completequests routine
+# food 1500, lumber 2000, stone 1000, iron 1000
+echo "step {++s}"
+
+if !city.hasBuilding(6,2) upgrade i
+if !city.hasBuilding(6,3) upgrade i
+# wait
+echo "step {++s}"
+
+if !city.hasBuilding(2) create b
+# use speedup (free)
+completequests routine
+# food 1000, lumber 1200, stone 1500, iron 1000
+echo "step {++s}"
+
+if !city.hasBuilding(22) create fo
+# use speedup (free)
+completequests routine
+# food 500, lumber 1500, stone 2000, iron 1500
+echo "step {++s}"
+
+if !city.hasBuilding(30) create be
+# wait
+echo "step {++s}"
+
+buy stone 100
+# can occur while waiting for be:1
+echo "step {++s}"
+
+completequests routine
+# gold 1000
+# food 150, lumber 1000, stone 3000, iron 300
+echo "step {++s}"
+
+if city.countBuilding(1) < 8 create c
+if city.countBuilding(1) < 8 repeat
+
+
+if !city.hasBuilding(31,2) upgrade /nowait t
+if !city.hasBuilding(31,2) && $error repeat
+
+# use 2 bg speedups
+if !city.hasBuilding(31,2) buildingspeedup @-1 Beginner Guidelines
+if !city.hasBuilding(31,2) buildingspeedup @-1 Beginner Guidelines
+completequests routine
+# pg 1, food 2500, lumber 6500, stone 5500, iron 2500
+# pg 1, bg 1, pres 100, lieutenant
+# cross medal 2, pres 100, food 10000
+echo "step {++s}"
+
+# send mail to ---
+command "mail Imperator Stage01 'Test'"
+completequests routine
+#speaker 5, pres 100, gold 1000
+echo "step {++s}"
+
+# chat in world channel
+#execute "worldchat " +  round(random()*100) 
+completequests routine
+# 10cents, pres 100, gold 1000
+echo "step {++s}"
+
+if !city.hasBuilding(22,2) upgrade /speedup="Beginner Guidelines" fo
+if $error repeat
+completequests routine
+# bg 2
+echo "step {++s}"
+
+if !city.hasBuilding(26) create ws
+if $error repeat
+completequests routine
+# food 1500, lumber 5000, stone 5000, iron 5000
+echo "step {++s}"
+
+if !city.hasBuilding(5,2) upgrade q
+# use speedup (free)
+echo "step {++s}"
+
+if !city.hasBuilding(28) create e
+if $error repeat
+# wait
+completequests routine
+# food 500, lumber 2000, stone 1000, iron 500
+echo "step {++s}"
+
+# set up some trade policies to support the bigger builds.
+goal "config trade:1"
+goal "tradepolicy /type:gold /min:500k"
+goal "tradepolicy /type:food /min:50k /max:100k"
+goal "tradepolicy /type:wood /min:25k /max:50k"
+goal "tradepolicy /type:stone /min:15k /max:30k"
+goal "tradepolicy /type:stone /min:5k /max:20k"
+
+
+if !city.hasBuilding(32,1) create /nowait w
+if $error repeat
+if !city.hasBuilding(32,1) buildingspeedup Beginner Guidelines
+if !city.hasBuilding(32,1) buildingspeedup Beginner Guidelines
+completequests routine
+echo "step {++s}"
+
+if !city.hasBuilding(25) create a
+if $error repeat
+# wait
+completequests routine
+# pg 1, food 150, lumber 2500, stone 1500, iron 200
+echo "step {++s}"
+
+
+# have 13 sawmills
+if city.countBuilding(4,1) < 13 create s
+if city.countBuilding(4,1) < 13 repeat
+completequests routine
+# arch saw, lumber 1000
+echo "step {++s}"
+
+if city.countBuilding(1) < 8 create c
+if city.countBuilding(1) < 8 repeat
+completequests routine
+# pop 100, food 1000, lumber 4000, stone 1000, iron 1000
+echo "step {++s}"
+
+research lu:1
+# don't wait
+echo "step {++s}"
+
+if !city.hasBuilding(5,3) upgrade q
+if !city.hasBuilding(5,3) repeat
+echo "step {++s}"
+
+if !city.hasBuilding(30,2) upgrade /speedup="Beginner Guidelines" be
+# use bg speedup
+completequests routine
+# food 300, lumber 2000, stone 6000, iron 600
+echo "step {++s}"
+
+# at this point we are waiting on lumber (12000) and stone (10000)
+# to complete town hall 3 - which completes this stage.
+# If market supports buy diffs.
+echo "step {++s}"
+
+# levy stone
+levy stone
+completequests routine
+# stone 10000
+comfort popraise
+completequests routine
+echo "step {++s}"
+
+
+# assume hero has been upgraded at this point (moves quest along)
+#if ItemCount("Hero Hunting") > 0 useitem hero hunting
+# apply hero hunting
+#completequests routine
+# holy water, hero hunting 2, pres 100, gold 5000
+echo "step {++s}"
+
+# wait for res...
+label waitonres
+if city.resource.stone.amount < 10000 echo 'waiting on stone for th3'
+if city.resource.wood.amount < 12000 echo 'waiting on wood for th3'
+if (city.resource.stone.amount < 10000 || city.resource.wood.amount < 12000) goto waitonres
+echo "step {++s}"
+
+create warehouse
+completequests routine
+demo warehouse
+
+
+# LAST STEP
+if city.hasBuilding(31,3) goto STAGE01_EOS
+upgrade /nowait /speedup="Primary Guidelines" t
+# use pg speedup
+completequests routine
+echo "step {++s}"
+
+label STAGE01_EOS
+
+# th=3
+# w=1
+# 1-f,1-q,1-i,13-s
+# 8-c,1-b,r=1,be=2,e=1,a=1,fo=2,ws=1
+
+
+
+
+

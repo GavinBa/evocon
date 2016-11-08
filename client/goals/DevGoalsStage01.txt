@@ -1,0 +1,6 @@
+# Development Goals - Stage # 01
+config comfort:1
+build c:1
+build c:2
+build f:1,s:1,q:1,i:1
+

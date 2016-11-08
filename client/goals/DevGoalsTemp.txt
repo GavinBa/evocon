@@ -1,0 +1,223 @@
+# complete daily quest
+if !city.hasBuilding(1) create cottage
+# wait
+completequests routine
+# bg, amulet, pop 30 food 200 lumber 1000 stone 200 iron 100
+#spin wheel
+useitem amulet
+completequests routine
+# bg, amulet, pop 20, food 300, lumber 1500, stone 300, iron 150
+completequests routine
+# pres 10, pop 10, gold 100
+
+# get newbies package
+useitem Newbies_Package
+sleep 3
+completequests routine
+# pres 100, gold 10000
+
+if !city.hasBuilding(1,2) upgrade c
+#wait
+sleep 3
+completequests routine
+# pop 50, food 500, lumber 2000, stone 500, iron 500
+if !city.hasBuilding(7,1) create farm
+completequests routine
+# bg, food 100, lumber 500, stone 500, iron 300
+
+if !city.hasBuilding(4,1) create s
+completequests routine
+# bg, food 200, lumber 200, stone 500, iron 500
+if !city.hasBuilding(5,1) create q
+completequests routine
+# bg, food 300, lumber 750, stone 300, iron 500
+
+if !city.hasBuilding(6,1) create i
+completequests routine
+# bg, food 500, lumber 800, stone 750, iron 500
+
+config hero:1,nomayor:1
+production 100 100 100 100
+completequests routine
+settaxrate 20
+completequests routine
+
+changeflag galf
+completequests routine
+# national flag, gold 1000
+
+if !city.hasBuilding(21) create inn
+sleep 2
+completequests routine
+# food 500, lumber 2000, stone 1000, iron 500
+
+if !city.hasBuilding(29) create r
+completequests routine
+# food 500, lumber 1000, stone 2000, iron 500
+
+if !city.hasBuilding(4,2) upgrade s
+# use speedup (free)
+completequests routine
+# food 1000, lumber 1000, stone 1000, iron 1000
+
+if !city.hasBuilding(7,2) upgrade f
+if !city.hasBuilding(7,3) upgrade f
+if !city.hasBuilding(7,4) upgrade f
+if !city.hasBuilding(7,5) upgrade f
+#wait
+if !city.hasBuilding(7,5) echo 'waiting on farm level 5'
+repeat
+
+completequests routine
+# plowshare, food 1000
+# food 1000, lumber 5000, stone 3000, iron 2500
+# pres 20, pop 20, gold 200
+
+if !city.hasBuilding(27) create fh
+completequests routine
+#gold 1000, food 1000, lumber 3000, stone 1500, iron 1000
+
+config hero:11
+# completequests
+# gold 1000
+
+if !city.hasBuilding(23) create /speedup="Beginner Guidelines" m
+completquests
+# 5cents, food 1500, lumber 1500, stone 1500, iron 1500
+
+sell iron 100
+completequests routine
+gold 1000
+
+if !city.hasBuilding(20) create st
+completequests routine
+# food 1500, lumber 2000, stone 1000, iron 1000
+
+if !city.hasBuilding(6,2) upgrade i
+if !city.hasBuilding(6,3) upgrade i
+# wait
+
+if !city.hasBuilding(2) create b
+# use speedup (free)
+completequests routine
+# food 1000, lumber 1200, stone 1500, iron 1000
+
+if !city.hasBuilding(22) create fo
+# use speedup (free)
+completequests routine
+# food 500, lumber 1500, stone 2000, iron 1500
+
+if !city.hasBuilding(30) create be
+# wait
+
+buy stone 100
+# can occur while waiting for be:1
+
+completequests routine
+# gold 1000
+# food 150, lumber 1000, stone 3000, iron 300
+
+if !city.hasBuilding(31,2) upgrade th
+# use 2 bg speedups
+if !city.hasBuilding(31,2) buildingspeedup @31 Beginner Guidelines
+if !city.hasBuilding(31,2) buildingspeedup @31 Beginner Guidelines
+completequests routine
+# pg 1, food 2500, lumber 6500, stone 5500, iron 2500
+# pg 1, bg 1, pres 100, lieutenant
+# cross medal 2, pres 100, food 10000
+
+# send mail to ---
+command "mail Imperator Stage01 'Test'"
+completequests routine
+#speaker 5, pres 100, gold 1000
+
+# chat in world channel
+execute "worldchat " +  round(random()*100) 
+completequests routine
+# 10cents, pres 100, gold 1000
+
+if !city.hasBuilding(22,2) upgrade /speedup="Beginner Guidelines" fh
+completequests routine
+# bg 2
+
+if !city.hasBuilding(26) create ws
+completequests routine
+# food 1500, lumber 5000, stone 5000, iron 5000
+
+if !city.hasBuilding(5,2) upgrade q
+# use speedup (free)
+
+if !city.hasBuilding(32,1) create w
+if !city.hasBuilding(32,1)buildingspeedup @32 Beginner Guidelines
+if !city.hasBuilding(32,1)buildingspeedup @32 Beginner Guidelines
+completequests routine
+
+if !city.hasBuilding(25) create a
+# wait
+completequests routine
+# pg 1, food 150, lumber 2500, stone 1500, iron 200
+
+if !city.hasBuilding(28) create e
+# wait
+completequests routine
+# food 500, lumber 2000, stone 1000, iron 500
+
+# have 13 sawmills
+if city.countBuilding(4,1) < 13 create s
+if city.countBuilding(4,1) < 13 repeat
+completequests routine
+# arch saw, lumber 1000
+
+if city.countBuilding(1) < 8 create c
+if city.countBuilding(1) < 8 repeat
+completequests routine
+# pop 100, food 1000, lumber 4000, stone 1000, iron 1000
+
+research lu:1
+# don't wait
+
+if !city.hasBuilding(5,3) update q
+if !city.hasBuilding(5,3) repeat
+
+if !city.hasBuilding(30,2) upgrade /speedup="Beginner Guidelines" be
+# use bg speedup
+completequests routine
+# food 300, lumber 2000, stone 6000, iron 600
+
+# at this point we are waiting on lumber (12000) and stone (10000)
+# to complete town hall 3 - which completes this stage.
+# If market supports buy diffs.
+
+# levy stone
+levy stone
+completequests routine
+# stone 10000
+comfort popraise
+completequests routine
+
+
+# assume hero has been upgraded at this point (moves quest along)
+#if ItemCount("Hero Hunting") > 0 useitem hero hunting
+# apply hero hunting
+#completequests routine
+# holy water, hero hunting 2, pres 100, gold 5000
+
+# wait for res...
+label waitonres
+if city.resource.stone.amount < 10000 echo 'waiting on stone for th3'
+if city.resource.wood.amount < 12000 echo 'waiting on wood for th3'
+if (city.resource.stone.amount < 10000 || city.resource.wood.amount < 12000) goto waitonres
+
+if city.hasBuilding(31,3) goto STAGE01_EOS
+upgrade /speedup="Primary Guidelines" th
+# use pg speedup
+completequests routine
+
+label STAGE01_EOS
+
+
+
+
+
+
+

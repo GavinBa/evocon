@@ -191,7 +191,7 @@ class InlineBuySell {
 	}
    
    if ($rowCnt == 0) {
-      printf("//no rows in price dB");
+      $this->m_cs->addEcho("Error getting price data (probably bad parms)");
       return false;
    }
    

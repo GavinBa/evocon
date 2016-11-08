@@ -5,14 +5,15 @@ class IdleBuild extends StateProcessor {
    var $m_city;
 
    private static $builds = array (
-      array("Feasting Hall", "fh", 9),
-      array("Academy",       "a", 9),
-      array("Cottage",       "c", 9),
-      array("Town Hall",     "t", 9),
-      array("Marketplace",   "m", 9),
-      array("Barracks",      "b", 9),
-      array("Sawmill",       "s", 8),
-      array("Ironmine",      "i", 8)
+      array("Feasting Hall",  "fh", 9),
+      array("Academy",        "a",  9),
+      array("Cottage",        "c",  9),
+      array("Town Hall",      "t",  9),
+      array("Marketplace",    "m",  9),
+      array("Barracks",       "b",  9),
+      array("Sawmill",        "s",  8),
+      array("Ironmine",       "i",  8),
+      array("Relief Station", "rs", 5)
    );
    
    public function __construct($city) {

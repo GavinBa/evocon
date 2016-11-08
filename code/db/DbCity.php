@@ -63,6 +63,20 @@ class DbCity {
      }
      return $exists;
   }
+
+  public function cityNameExistsExact($name) {
+     $exists = false;
+     $result = $this->m_db->query("SELECT id FROM city WHERE server=" .
+         $this->m_server . " AND player LIKE '%" . $this->m_player .
+         "%' AND name = '" . $name . "'");
+     if ($result->num_rows > 0) {
+        $exists = true;
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $exists;
+  }
   
   public function getTotalCityCount() {
      $cnt = 0;
@@ -187,6 +201,19 @@ class DbCity {
   public function updateName($newname) {
      $result = $this->m_db->query("UPDATE city SET name='" . $newname . "' WHERE id=" . $this->getId());
   }
+
+  public function getName() {
+     $name = "";
+     $result = $this->m_db->query("SELECT name FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $name = $row["name"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $name;
+  }
   
   public function setNewCityFieldId ($fid) {
      $result = $this->m_db->query("UPDATE city SET newcityfid=" . $fid . " WHERE id=" . $this->getId());
@@ -224,6 +251,40 @@ class DbCity {
   
   public function setResProfile($rpi) {
      $result = $this->m_db->query("UPDATE city SET resprofile_idx='" . $rpi . "' WHERE id=" . $this->getId());
+  }
+  
+  public function getDevelopment() {
+     $dev = 0;
+     $result = $this->m_db->query("SELECT development FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $dev = $row["development"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $dev;
+  }
+  
+  public function setDevelopment($dev) {
+     $result = $this->m_db->query("UPDATE city SET development='" . $dev . "' WHERE id=" . $this->getId());
+  }
+
+  public function getDevStage() {
+     $stage = 0;
+     $result = $this->m_db->query("SELECT devstage FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $stage = $row["devstage"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $stage;
+  }
+  
+  public function setDevStage($stage) {
+     $result = $this->m_db->query("UPDATE city SET devstage='" . $stage . "' WHERE id=" . $this->getId());
   }
   
 }

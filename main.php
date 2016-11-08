@@ -81,7 +81,7 @@ $ibs->process($cScript);
 
 
 
-print "http://192.168.1.77:8000/" . $cScript->getFullPath();
+print "http://192.168.1.77:8000/" . rawurlencode($cScript->getFullPath());
 
 $cScript->endFile();
 
