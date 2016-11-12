@@ -463,17 +463,17 @@ class InlineBuySell {
     
     if ($noGoldForReservedBuy == TRUE || $goldAmt < $rgoldAmt) {
         // check if we have a lot of something to sell in small amounts
-        if ($woodAmt > $rwoodAmt || $citytype == WOOD) {
+        if ($woodAmt > $rwoodAmt || $citytype == self::WOOD) {
             $rAmt = max($rwoodAmt,1);
-            if (($woodAmt / $rAmt) > self::DIVISOR_FOR_BIG_RESERVES || ($citytype == WOOD && ($woodAmt-$buyAmt) > $rwoodAmtOrig)) { 
+            if (($woodAmt / $rAmt) > self::DIVISOR_FOR_BIG_RESERVES || ($citytype == self::WOOD && ($woodAmt-$buyAmt) > $rwoodAmtOrig)) { 
 //                echo "sell wood ".$buyAmt." ".$wps." // generate small amt of gold ".$woodAmt." ".$rwoodAmt;
                 $this->emitTrade("sell wood",$buyAmt,$wps,"generate small amt of gold");
                 return false;
             }
         }
-        if ($ironAmt > $rironAmt || $citytype == IRON) {
+        if ($ironAmt > $rironAmt || $citytype == self::IRON) {
             $rAmt = max($rironAmt,1);
-            if (($ironAmt / $rAmt) > self::DIVISOR_FOR_BIG_RESERVES || ($citytype == IRON && ($ironAmt-$buyAmt) > $rironAmtOrig)) { 
+            if (($ironAmt / $rAmt) > self::DIVISOR_FOR_BIG_RESERVES || ($citytype == self::IRON && ($ironAmt-$buyAmt) > $rironAmtOrig)) { 
 //                echo "sell iron ".$buyAmt." ".$ips." // generate small amt of gold";
                 $this->emitTrade("sell iron",$buyAmt,$ips,"generate small amt of gold");
                 return false;
@@ -509,12 +509,12 @@ class InlineBuySell {
     
     // If gold is low - check city type and sell over min
     if ($goldAmt < $rgoldAmt) {
-        if ($citytype == WOOD && $woodAmt > ($rwoodAmtOrig+$buyAmt)) {
+        if ($citytype == self::WOOD && $woodAmt > ($rwoodAmtOrig+$buyAmt)) {
 //            echo "sell wood ".$buyAmt." ".$wps." // sell to min by city type";
             $this->emitTrade("sell wood",$buyAmt,$wps,"sell to min by city type");
             return false;
         }
-        if ($citytype == IRON && $ironAmt > ($rironAmtOrig+$buyAmt)) {
+        if ($citytype == self::IRON && $ironAmt > ($rironAmtOrig+$buyAmt)) {
 //            echo "sell iron ".$buyAmt." ".$ips." // sell to min by city type";
             $this->emitTrade("sell iron",$buyAmt,$ips,"sell to min by city type");
             return false;

@@ -3,6 +3,8 @@
 require_once "state.php";
 require_once "lib/db.php";
 require_once "lib/util.php";
+require_once "code/chat/ChatMonitor.php";
+require_once "code/cities/ResourceMonitor.php";
 require_once "code/market/res.php";
 require_once "code/market/InlineBuySell.php";
 require_once "code/heroes/heroes.php";
@@ -68,6 +70,13 @@ $cScript = new ClientScript($cReq);
 /* Clean up old scripts for current city */
 $cScript->purge();
 $cScript->startFile();
+
+/* Create and process chat monitoring */
+$cm = new ChatMonitor($cReq);
+$cm->process($cScript);
+
+$rm = new ResourceMonitor($c, $cReq);
+$rm->process($cScript);
 
 /* Update the state */
 $s = new StateController($c, $cScript, $cReq);

@@ -19,7 +19,7 @@ keepheroes any:level>=50|any:base>=69
 config keepatthome:0
 config npc:5
 config nomayor:0
-nolevelheroes violet
+#nolevelheroes violet
 config fasthero:70
 config attackgap:6
 config gate:0.2
@@ -42,15 +42,16 @@ fortification trap:1,ab:1
 fortification trap:100,ab:100,at:100
 
 config valleymin:1
-config valley:4
+config valley:6
+config hunting:2
 
 valleyheroes any
 valleytroops 1 a:50
 valleytroops 2 a:100
 valleytroops 3 a:200
-valleytroops 4 a:400,sw:1,p:1,s:1,w:1
-valleytroops 5 a:800,sw:1,p:1,s:1,w:1,c:1
-valleytroops 6 a:1600,sw:1,p:1,s:1,w:1,c:1
+valleytroops 4 a:400,sw:1,p:1,w:1
+valleytroops 5 a:800,sw:1,p:1,w:1
+valleytroops 6 a:1600,sw:1,p:1,w:1
 valleytroops 7 a:10000,sw:1,p:1,s:1,w:1,c:1
 valleytroops 8 a:15000,sw:1,p:1,s:1,w:1,c:1
 valleytroops 9 a:20000,sw:1,p:1,s:1,w:1,c:1,b:1
@@ -75,10 +76,15 @@ build c:6:8
 build s:4:16,i:4,q:4
 build fo:5,ws:5,st:5
 build b:9:2
-
+build s:5:22
+build b:9:4
 
 troop w:10,wo:10,p:10,sw:10,a:10
-troop a:2k
+troop a:2k,s:100
+troop b:400
+troop t:500
+troop b:800,t:1k
+
 
 research ag:1,lu:1,mas:1,mi:1
 research in:1,mt:1,ir:1
@@ -89,4 +95,5 @@ research ms:4
 research mt:4,in:4
 research ar:1,ho:1
 research ar:2,ho:2
-research ar:8,ho:6,mt:5
+research met:5
+research ar:8,ho:6,mt:5,in:7

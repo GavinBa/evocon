@@ -87,7 +87,7 @@ class DevelopmentMonitor extends City {
            break;
            
         case 11:
-           $this->m_cs->addEcho('Stage 11 - Upgrade barracks to 9 - and research');
+           $this->m_cs->addEcho('Stage 11 (' . $this->m_cr->getUser() . ':' . $this->m_city->getName() . ') - Upgrade barracks to 9 - and research');
            $this->m_cs->addLine('@get "http://192.168.1.77:8000/client/goals/DevGoalsStage08.txt" {time: date().time }');
            $this->m_cs->addLine('if $error == null goal $result');
            break;
@@ -131,7 +131,7 @@ class DevelopmentMonitor extends City {
            break;
            
         case 4:
-           $this->m_cs->addEcho("Nestling - Stage 4");
+           $this->m_cs->addEcho("Nestling - Stage 4 (" . $this->m_cr->getUser() . ":" . $this->m_city->getName() . ") (exit => b >= 2)");
            $this->m_cs->addLine("completequests routine");
            $this->m_cs->addLine('@get "http://192.168.1.77:8000/client/goals/DevGoalsStage03.txt" {time: date().time }');
            $this->m_cs->addLine('if $error == null goal $result');
@@ -148,6 +148,8 @@ class DevelopmentMonitor extends City {
               // apply
               $this->m_cs->addLine("command \"apply " . $alliance . "\"");
               $dba->setApplied(1);
+              // send whisper to host
+              $this->m_cs->addLine("whisper " . $dba->getHost() . " APPLY");
            }
            $this->m_cs->addLine("completequests routine");
            $this->m_cs->addLine('@get "http://192.168.1.77:8000/client/goals/DevGoalsStage04.txt" {time: date().time }');
@@ -162,7 +164,6 @@ class DevelopmentMonitor extends City {
            $this->m_cs->addLine("alliancechat hello");
            $this->m_cs->addLine("completequests routine");
            $dba = new DbAlts($this->m_cr->getDbconnect(), $this->m_cr->getServer(), $this->m_cr->getUser(), $this->m_city);
-           $this->m_cs->addLine("whisper " . $dba->getHost() . " I am here.");
            $this->m_dbc->setDevStage(7);
            break;
         

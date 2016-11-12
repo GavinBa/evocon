@@ -65,6 +65,18 @@ class DbAlts {
      return $host;
   }
   
+  public function isHost() {
+     $ishost = false;
+     $result = $this->m_db->query("SELECT _id FROM alts WHERE host='" . $this->m_player . "'");
+     if ($result && $result->num_rows > 0) {
+        $ishost = true;
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $ishost;
+  }
+  
   public function getAlliance() {
      $alliance = NULL;
      if ($this->playerExists()) {
@@ -104,6 +116,9 @@ class DbAlts {
      $result = $this->m_db->query("UPDATE alts SET applied='" . $applied . "' WHERE _id=" . $this->getId());
   }
 
+  public function setHostTestOnly($host) {
+     $result = $this->m_db->query("UPDATE alts SET host='" . $host . "' WHERE _id=" . $this->getId());
+  }
   
 }
 

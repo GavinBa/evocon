@@ -287,6 +287,108 @@ class DbCity {
      $result = $this->m_db->query("UPDATE city SET devstage='" . $stage . "' WHERE id=" . $this->getId());
   }
   
+  public function getGold() {
+     $res = 0;
+     $result = $this->m_db->query("SELECT gold FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $res = $row["gold"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $res;
+  }
+  
+  public function setGold($gold) {
+     $result = $this->m_db->query("UPDATE city SET gold='" . $gold . "' WHERE id=" . $this->getId());
+  }
+
+  public function getFood() {
+     $res = 0;
+     $result = $this->m_db->query("SELECT food FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $res = $row["food"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $res;
+  }
+  
+  public function setFood($food) {
+     $result = $this->m_db->query("UPDATE city SET food='" . $food . "' WHERE id=" . $this->getId());
+  }
+
+  public function getWood() {
+     $res = 0;
+     $result = $this->m_db->query("SELECT wood FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $res = $row["wood"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $res;
+  }
+  
+  public function setWood($wood) {
+     $result = $this->m_db->query("UPDATE city SET wood='" . $wood . "' WHERE id=" . $this->getId());
+  }
+
+  public function getStone() {
+     $res = 0;
+     $result = $this->m_db->query("SELECT stone FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $res = $row["stone"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $res;
+  }
+  
+  public function setStone($stone) {
+     $result = $this->m_db->query("UPDATE city SET stone='" . $stone . "' WHERE id=" . $this->getId());
+  }
+
+  public function getIron() {
+     $res = 0;
+     $result = $this->m_db->query("SELECT iron FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $res = $row["iron"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $res;
+  }
+  
+  public function setIron($iron) {
+     $result = $this->m_db->query("UPDATE city SET iron='" . $iron . "' WHERE id=" . $this->getId());
+  }
+
+  public function getCastleIdx() {
+     $idx = 0;
+     $result = $this->m_db->query("SELECT castle_idx FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $idx = $row["castle_idx"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $idx;
+  }
+  
+  public function setCastleIdx($idx) {
+     $result = $this->m_db->query("UPDATE city SET castle_idx='" . $idx . "' WHERE id=" . $this->getId());
+  }
+  
 }
 
 ?>

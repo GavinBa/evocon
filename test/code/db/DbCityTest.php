@@ -96,6 +96,20 @@ class DbCityTest extends TestCase
       $this->assertFalse(Development::isGrown($dev));
    }
    
+   public function testRes() {
+      $this->assertNotNull($this->dbCity);
+      $this->dbCity->setGold(10);
+      $this->assertEquals(10,$this->dbCity->getGold());
+      $this->dbCity->setFood(15);
+      $this->assertEquals(15,$this->dbCity->getFood());
+      $this->dbCity->setWood(20);
+      $this->assertEquals(20,$this->dbCity->getWood());
+      $this->dbCity->setStone(25);
+      $this->assertEquals(25,$this->dbCity->getStone());
+      $this->dbCity->setIron(30);
+      $this->assertEquals(30,$this->dbCity->getIron());
+   }
+   
    protected function tearDown() {
       if ($this->dbc) {
          db_disconnectDB($this->dbc);

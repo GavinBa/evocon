@@ -110,6 +110,15 @@ completequests
 # 5cents, food 1500, lumber 1500, stone 1500, iron 1500
 echo "step {++s}"
 
+
+# set up some trade policies to support the bigger builds.
+goal "config trade:1"
+goal "tradepolicy /type:gold /min:50k"
+goal "tradepolicy /type:food /min:50k /max:100k"
+goal "tradepolicy /type:wood /min:25k /max:50k"
+goal "tradepolicy /type:stone /min:25k /max:30k"
+goal "tradepolicy /type:stone /min:5k /max:20k"
+
 sell iron 100
 completequests routine
 #gold 1000
@@ -158,8 +167,8 @@ if !city.hasBuilding(31,2) upgrade /nowait t
 if !city.hasBuilding(31,2) && $error repeat
 
 # use 2 bg speedups
-if !city.hasBuilding(31,2) buildingspeedup @-1 Beginner Guidelines
-if !city.hasBuilding(31,2) buildingspeedup @-1 Beginner Guidelines
+if !city.hasBuilding(31,2) buildingspeedup Beginner Guidelines
+if !city.hasBuilding(31,2) buildingspeedup Beginner Guidelines
 completequests routine
 # pg 1, food 2500, lumber 6500, stone 5500, iron 2500
 # pg 1, bg 1, pres 100, lieutenant
@@ -201,13 +210,6 @@ completequests routine
 # food 500, lumber 2000, stone 1000, iron 500
 echo "step {++s}"
 
-# set up some trade policies to support the bigger builds.
-goal "config trade:1"
-goal "tradepolicy /type:gold /min:500k"
-goal "tradepolicy /type:food /min:50k /max:100k"
-goal "tradepolicy /type:wood /min:25k /max:50k"
-goal "tradepolicy /type:stone /min:15k /max:30k"
-goal "tradepolicy /type:stone /min:5k /max:20k"
 
 
 if !city.hasBuilding(32,1) create /nowait w

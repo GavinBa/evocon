@@ -24,6 +24,8 @@ class StateMonitor extends StateProcessor {
      switch ($state) {
 
          case STATE_MONITOR:
+         
+            // Check if city position has changed from stored position.
             $result = STATE_MONITOR_FIELDS;
             break;
             
@@ -78,6 +80,10 @@ class StateMonitor extends StateProcessor {
      }
             
      return $result;
+  }
+  
+  protected function checkPosition($cs) {
+     
   }
   
 }
