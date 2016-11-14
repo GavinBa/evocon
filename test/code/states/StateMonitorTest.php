@@ -54,7 +54,7 @@ class StateMonitorTest extends TestCase
       $fp = $this->cs->getFullPath();
       printf("Checking on file %s\n", $fp);
       $lines = file($fp);
-      $this->assertCount(28,$lines);
+      $this->assertCount(27,$lines);
       $this->assertEquals($ns,STATE_MONITOR_FIELDS_RESULTS);
    }
    
@@ -76,7 +76,7 @@ class StateMonitorTest extends TestCase
       }
       printf("Found %d attacks\n", $numAttacks);
       $this->assertGreaterThan(0,$numAttacks);
-      $this->assertCount(26,$lines);
+      $this->assertCount(25,$lines);
    }
    
    public function testProcessMonitorReportBuffer() {
@@ -88,7 +88,7 @@ class StateMonitorTest extends TestCase
       $fp = $this->cs->getFullPath();
       printf("Checking on file %s\n", $fp);
       $lines = file($fp);
-      $this->assertCount(3,$lines);
+      $this->assertCount(2,$lines);
       $found = false;
       foreach ($lines as $line) {
          if (strpos($line,"reportLog.buffer") !== false) {
@@ -104,6 +104,29 @@ class StateMonitorTest extends TestCase
       $_POST["p2"] = Defaults::$reportBuffer;
       $ns = $sm->process($this->cs,STATE_MONITOR_STORE_REPORT_BUFFER);
       $this->assertEquals($ns,STATE_IDLE);
+   }
+   
+   public function testCheckPosition() {
+      $dbcity = $this->cr->getDbc();
+      $idx = $dbcity->getCastleIdx();
+      $this->assertGreaterThan(0,$idx);
+      $beforeIdx = $idx;
+      printf("json-x: %d, json-y: %d\n", $this->tc->getX(),$this->tc->getY());
+      $sm = new StateMonitor($this->cr,$this->tc);
+      $this->assertNotNull($sm);
+      $sm->process($this->cs,STATE_MONITOR);
+      $this->assertEquals($beforeIdx,$dbcity->getCastleIdx());
+      $json = json_decode(Defaults::$defaultCityJson);
+      $json->x = 850;
+      $json->y = 850;
+      $alteredTc = new City($json);
+      $this->cr = new ClientRequest($this->dbc,Defaults::$server,Defaults::$player,$alteredTc);
+      $sm = new StateMonitor($this->cr,$alteredTc);
+      $sm->process($this->cs,STATE_MONITOR);
+      $this->assertNotEquals($beforeIdx,$dbcity->getCastleIdx());
+      $beforeIdx = $dbcity->getCastleIdx();
+      $sm->process($this->cs,STATE_MONITOR);
+      $this->assertEquals($beforeIdx,$dbcity->getCastleIdx());
    }
    
    

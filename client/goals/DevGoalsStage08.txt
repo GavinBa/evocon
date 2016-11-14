@@ -78,6 +78,7 @@ build fo:5,ws:5,st:5
 build b:9:2
 build s:5:22
 build b:9:4
+build a:7,be:7,w:4
 
 troop w:10,wo:10,p:10,sw:10,a:10
 troop a:2k,s:100
@@ -97,3 +98,15 @@ research ar:1,ho:1
 research ar:2,ho:2
 research met:5
 research ar:8,ho:6,mt:5,in:7
+
+npctroops 5 b:400
+npcheroes 5 any
+rallypolicy v:3
+//n = npc farming
+//b = buildnpc
+//m = medal hunting
+//v = valley farming & safevalleyfarming
+//starting in version 3057:
+//t = troop reinforcements
+//r = resource transports
+//v = safe/valley farming & valley acquisition

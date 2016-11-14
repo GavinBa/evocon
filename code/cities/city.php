@@ -53,6 +53,14 @@ class City {
      return false;
   }
   
+  public function getX() {
+     return $this->m_city->x;
+  }
+  
+  public function getY() {
+     return $this->m_city->y;
+  }
+  
   public function getNumMarchingArmies() {
      return count($this->m_city->selfArmies);
   }

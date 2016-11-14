@@ -3,6 +3,7 @@
 require_once "StateProcessor.php";
 require_once "states.php";
 require_once "lib/util.php";
+require_once "code/db/DbCastle.php";
 require_once "code/fields/Field.php";
 require_once "code/heroes/heroes.php";
 require_once "code/reports/ReportBuffer.php";
@@ -26,6 +27,8 @@ class StateMonitor extends StateProcessor {
          case STATE_MONITOR:
          
             // Check if city position has changed from stored position.
+            $this->checkPosition();
+            
             $result = STATE_MONITOR_FIELDS;
             break;
             
@@ -82,8 +85,32 @@ class StateMonitor extends StateProcessor {
      return $result;
   }
   
-  protected function checkPosition($cs) {
-     
+   protected function checkPosition() {
+      // get my city from castle db
+      $dbcity = $this->m_cr->getDbc();
+      $idx = $dbcity->getCastleIdx();
+      $dbc = DbCastle::fromExisting($this->m_cr->getDbconnect(),$idx);
+      
+      // if it exists and the castle moved then remove current castle entry
+      if ($dbc->exists()) {
+         if ($dbc->getX() != $this->m_city->getX() || 
+             $dbc->getY() != $this->m_city->getY()) {
+            $dbc->remove();
+         }
+      }
+      
+      // if there is no castle entry then create one
+      if (!$dbc->exists()) {
+         // create a new entry
+         $dbc = new DbCastle($this->m_cr->getDbconnect(),
+                            $this->m_cr->getServer(),
+                            $this->m_city->getX(),
+                            $this->m_city->getY());
+         $dbc->create();
+         
+         // update the city with the new index
+         $dbcity->setCastleIdx($dbc->getId());
+      }
   }
   
 }

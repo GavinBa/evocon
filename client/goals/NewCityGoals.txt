@@ -185,8 +185,8 @@ requesttroops any b 4000 2k 400 800
 requesttroops c a 98k 100k 5k 10k
 
 
-requestresources any g 3m 50m 500k 1m
-requestresources any f 10m 50m 500k 1m
-requestresources any w 1m 10m 500k 1m
-requestresources any s 1m 10m 500k 1m
-requestresources any i 1m 10m 500k 1m
+requestresources any g 25m 500m 500k 5m
+requestresources any f 50m 100m 500k 5m
+requestresources any w 2m 10m 500k 1m
+requestresources any s 5m 10m 500k 1m
+requestresources any i 2m 10m 500k 1m

@@ -68,6 +68,15 @@ class DbCastle {
      }
      return $this->m_id;
   }
+  
+  public function exists() {
+     return ($this->getId() != -1);
+  }
+  
+  public function remove() {
+     $result = $this->m_db->query("DELETE FROM castle WHERE x=" . $this->m_x . " AND y=" . $this->m_y);
+     $this->m_id = -1;
+  }
 
   public function setPrestige($pres) {
      $result = $this->m_db->query("UPDATE castle SET prestige=" . $pres . " WHERE _id=" . $this->getId());
