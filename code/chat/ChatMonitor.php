@@ -1,5 +1,6 @@
 <?php
 
+require_once "code/chat/msgs/MessageProcessorFactory.php";
 require_once "code/db/DbAlts.php";
 
 
@@ -21,9 +22,11 @@ class ChatMonitor {
             if (is_array($p9json)) {
                foreach ($p9json as $chatmsg) {
                   $cs->addEcho("Msg from " . $chatmsg->from . " : " . $chatmsg->message);
-                  $msgLower = strtolower($chatmsg->message);
-                  if ($msgLower == "apply") {
-                     $this->processApply($cs,$chatmsg);
+                  if (MessageProcessorFactory::isValidMsg($chatmsg)) {
+                     $mp = MessageProcessorFactory::getProcessor($chatmsg);
+                     if ($mp) {
+                        $mp->process($this->m_cr,$cs,$chatmsg,$this->m_dba);
+                     }
                   }
                }
             }
@@ -37,10 +40,6 @@ class ChatMonitor {
      }
      
      
-  }
-  
-  protected function processApply($cs,$msg) {
-     $cs->addLine("command \"accept " . $msg->from . "\"");
   }
   
   

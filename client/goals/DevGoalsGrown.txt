@@ -1,5 +1,3 @@
-# Development Goals - Stage # 02
-
 # start hero management
 config hero:11
 
@@ -79,6 +77,13 @@ build s:5:22
 build b:9:4
 build a:7,be:7,w:4
 build t:6
+build s:4:19
+build r:7
+build be:9
+build fo:6,ws:6
+build w:5
+build c:8:8
+
 
 troop w:10,wo:10,p:10,sw:10,a:10
 troop a:2k,s:100
@@ -86,6 +91,7 @@ troop b:400
 troop t:500
 troop b:800,t:1k
 troop t:5k
+troop s:25k,a:10k
 
 
 research ag:1,lu:1,mas:1,mi:1
@@ -99,6 +105,8 @@ research ar:1,ho:1
 research ar:2,ho:2
 research met:5
 research ar:8,ho:6,mt:5,in:7
+research ag:3,lu:3,mas:3,mi:3
+research ag:4,lu:4,mas:4,mi:4
 
 npctroops 5 b:400,t:250
 npcheroes 5 any

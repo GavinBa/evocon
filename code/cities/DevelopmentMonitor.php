@@ -4,6 +4,7 @@ require_once "code/buildings/buildings.php";
 require_once "code/cities/city.php";
 require_once "code/cities/Development.php";
 require_once "code/db/DbAlts.php";
+require_once "code/research/Research.php";
 
 class DevelopmentMonitor extends City {
 	
@@ -11,6 +12,7 @@ class DevelopmentMonitor extends City {
   var $m_cr;
   var $m_dbc;
   var $m_buildings;
+  var $m_research;
   var $m_cs;
   
   public function __construct($city, $cr, $dbc) {
@@ -18,6 +20,7 @@ class DevelopmentMonitor extends City {
    $this->m_cr        = $cr;
    $this->m_dbc       = $dbc;
    $this->m_buildings = new Buildings($city);
+   $this->m_research  = new Research($city);
    $this->evaluate();
   }
   
@@ -42,7 +45,7 @@ class DevelopmentMonitor extends City {
         $this->m_dbc->setDevelopment(Development::HATCHLING);
      } else if ($this->m_buildings->getTownHallLevel() < 5) {
         $this->m_dbc->setDevelopment(Development::NESTLING);
-     } else if ($this->m_buildings->getTownHallLevel() <= 6) {
+     } else if ($this->m_buildings->getTownHallLevel() < 6) {
         $this->m_dbc->setDevelopment(Development::FLEDGLING);
      } else {
         $this->m_dbc->setDevelopment(Development::GROWN);
@@ -90,6 +93,7 @@ class DevelopmentMonitor extends City {
            $this->m_cs->addEcho('Stage 11 (' . $this->m_cr->getUser() . ':' . $this->m_city->getName() . ') - Upgrade barracks to 9 - and research');
            $this->m_cs->addLine('@get "http://192.168.1.77:8000/client/goals/DevGoalsStage08.txt" {time: date().time }');
            $this->m_cs->addLine('if $error == null goal $result');
+           
            break;
            
         default:

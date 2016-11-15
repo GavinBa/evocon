@@ -28,6 +28,7 @@ class StateMonitor extends StateProcessor {
          
             // Check if city position has changed from stored position.
             $this->checkPosition();
+            $this->checkGoals($cs);
             
             $result = STATE_MONITOR_FIELDS;
             break;
@@ -111,6 +112,21 @@ class StateMonitor extends StateProcessor {
          // update the city with the new index
          $dbcity->setCastleIdx($dbc->getId());
       }
+  }
+  
+  protected function checkGoals($cs) {
+     // if grown (out of development) use standard goals 
+     $dbcity = $this->m_cr->getDbc();
+     if ($dbcity->getDevStage() > 0) {
+        // check if goals string is already populated
+        //TODO - until goals is solid, keep loading
+//        if (strpos($this->m_city->getJson()->goals, "config npc") === false) {
+           $cs->addLine('resetgoals');
+           $cs->addLine('@get "http://192.168.1.77:8000/client/goals/DevGoalsGrown.txt" {time: date().time }');
+           $cs->addLine('if $error == null goal $result');
+           $cs->addLine('completequests routine');
+//        }
+     }
   }
   
 }

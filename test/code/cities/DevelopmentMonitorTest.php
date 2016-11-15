@@ -70,7 +70,7 @@ class DevelopmentMonitorTest extends TestCase
 
       foreach($this->tcJson->buildings as $myBuilding) {
          if ($myBuilding->name == "Town Hall") {
-            $myBuilding->level = 6;
+            $myBuilding->level = 5;
             break;
          }
       }
