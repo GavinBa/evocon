@@ -3,12 +3,15 @@ use PHPUnit\Framework\TestCase;
 
 require_once "code/cities/city.php";
 require_once "code/cities/ResourceMonitor.php";
+require_once "code/db/DbAlts.php";
 require_once "code/request/ClientRequest.php";
 require_once "code/script/ClientScript.php";
+require_once "code/timers/Timer.php";
+require_once "code/timers/TimerType.php";
 require_once "lib/db.php";
 
 
-class ChatMonitorTest extends TestCase
+class ResourceMonitorTest extends TestCase
 {
    protected $tcJson;
    protected $tc;
@@ -26,6 +29,7 @@ class ChatMonitorTest extends TestCase
       $this->cs = new ClientScript($this->cr);
       $this->assertNotNull($this->cs);
       $this->cs->startFile();
+      $this->cr->setCtime(5000000);
       $this->rm = new ResourceMonitor($this->tc,$this->cr);
    }
    
@@ -40,6 +44,23 @@ class ChatMonitorTest extends TestCase
       printf("goldamt: %d\n", $amt);
       $this->rm->process($this->cs);
       $this->assertEquals($amt,$this->cr->getDbc()->getGold());
+   }
+   
+   public function testSetDump() {
+      $this->assertNotNull($this->rm);
+      $dbalt = new DbAlts($this->dbc,Defaults::$server,Defaults::$player,$this->tc);
+      $this->assertTrue($dbalt->playerExists());
+      // reset alt timer
+      $timer = new Timer($this->cr->getDbconnect(),
+                         $this->cr->getServer(), $this->cr->getUser(), 
+                         TimerType::SETDUMP);
+      $timer->setExpiration(0,0);
+      $this->assertTrue($timer->hasExpired($this->cr->getCtime()));
+      $dbalt->updateColTestOnly("dumpx",50);
+      $dbalt->updateColTestOnly("dumpy",50);
+      $this->rm->process($this->cs);
+      $this->assertFalse($timer->hasExpired($this->cr->getCtime()));
+      $this->rm->process($this->cs);
    }
    
    

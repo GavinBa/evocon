@@ -1,3 +1,8 @@
+<?php
+require_once "../../lib/db.php";
+require_once "../../lib/util.php";
+require_once "../../code/db/DbGoals.php";
+?>
 # start hero management
 config hero:11
 
@@ -84,6 +89,7 @@ build fo:6,ws:6
 build w:5
 build c:8:8
 build b:5:13
+build a:8
 
 
 troop w:10,wo:10,p:10,sw:10,a:10
@@ -111,6 +117,7 @@ research ag:4,lu:4,mas:4,mi:4
 research med:1,con:1
 research in:9
 research ir:5,lo:5,com:5
+research met:6,ms:6,mt:6
 
 npctroops 5 b:400,t:400
 npcheroes 5 any:att>65
@@ -126,3 +133,24 @@ rallypolicy v:1 m:2
 //t = troop reinforcements
 //r = resource transports
 //v = safe/valley farming & valley acquisition
+<?php
+   // get db connection
+   $dbc = db_connectDB();
+   if (is_null($dbc)) {
+      return;
+   }
+
+   // get server, user, city
+   $server = util_setParam("server", 0);
+   $user   = util_setParam("player", "None");
+   $city   = util_setParam("city", "None");
+   // query database for goals
+   $goals = new DbGoals($dbc,$server,$user,$city);
+   foreach ($goals->getGoals() as $goal) {
+      printf("%s\n", $goal);
+   }
+   // append here
+   db_disconnectDB($dbc);
+   
+   return false;
+?>

@@ -120,6 +120,127 @@ class DbAlts {
      $result = $this->m_db->query("UPDATE alts SET host='" . $host . "' WHERE _id=" . $this->getId());
   }
   
+  public function isDumpSet() {
+     return ($this->getDumpX() != 0 && $this->getDumpY() != 0);
+  }
+  
+  public function getDumpX() {
+     $val = 0;
+     if ($this->playerExists()) {
+        $result = $this->m_db->query("SELECT dumpx FROM alts WHERE server=" .
+            $this->m_server . " AND player LIKE '%" . $this->m_player .
+            "%'");
+        if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+           $val = $row["dumpx"];
+        }
+        if ($result) {
+           $result->free();
+        }
+     }
+     return $val;
+  }
+  public function getDumpY() {
+     $val = 0;
+     if ($this->playerExists()) {
+        $result = $this->m_db->query("SELECT dumpy FROM alts WHERE server=" .
+            $this->m_server . " AND player LIKE '%" . $this->m_player .
+            "%'");
+        if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+           $val = $row["dumpy"];
+        }
+        if ($result) {
+           $result->free();
+        }
+     }
+     return $val;
+  }
+  public function getMaxGold() {
+     $val = 0;
+     if ($this->playerExists()) {
+        $result = $this->m_db->query("SELECT maxgold FROM alts WHERE server=" .
+            $this->m_server . " AND player LIKE '%" . $this->m_player .
+            "%'");
+        if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+           $val = $row["maxgold"];
+        }
+        if ($result) {
+           $result->free();
+        }
+     }
+     return $val;
+  }
+  public function getMaxFood() {
+     $val = 0;
+     if ($this->playerExists()) {
+        $result = $this->m_db->query("SELECT maxfood FROM alts WHERE server=" .
+            $this->m_server . " AND player LIKE '%" . $this->m_player .
+            "%'");
+        if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+           $val = $row["maxfood"];
+        }
+        if ($result) {
+           $result->free();
+        }
+     }
+     return $val;
+  }
+  public function getMaxWood() {
+     $val = 0;
+     if ($this->playerExists()) {
+        $result = $this->m_db->query("SELECT maxwood FROM alts WHERE server=" .
+            $this->m_server . " AND player LIKE '%" . $this->m_player .
+            "%'");
+        if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+           $val = $row["maxwood"];
+        }
+        if ($result) {
+           $result->free();
+        }
+     }
+     return $val;
+  }
+  public function getMaxStone() {
+     $val = 0;
+     if ($this->playerExists()) {
+        $result = $this->m_db->query("SELECT maxstone FROM alts WHERE server=" .
+            $this->m_server . " AND player LIKE '%" . $this->m_player .
+            "%'");
+        if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+           $val = $row["maxstone"];
+        }
+        if ($result) {
+           $result->free();
+        }
+     }
+     return $val;
+  }
+  public function getMaxIron() {
+     $val = 0;
+     if ($this->playerExists()) {
+        $result = $this->m_db->query("SELECT maxiron FROM alts WHERE server=" .
+            $this->m_server . " AND player LIKE '%" . $this->m_player .
+            "%'");
+        if ($result->num_rows > 0) {
+           $row = $result->fetch_assoc();
+           $val = $row["maxiron"];
+        }
+        if ($result) {
+           $result->free();
+        }
+     }
+     return $val;
+  }
+  
+  public function updateColTestOnly($col,$val) {
+     $result = $this->m_db->query("UPDATE alts SET " . $col . "='" . $val . "' WHERE _id=" . $this->getId());
+  }
+  
 }
 
 ?>

@@ -122,8 +122,9 @@ class StateMonitor extends StateProcessor {
         //TODO - until goals is solid, keep loading
 //        if (strpos($this->m_city->getJson()->goals, "config npc") === false) {
            $cs->addLine('resetgoals');
-           $cs->addLine('@get "http://192.168.1.77:8000/client/goals/DevGoalsGrown.txt" {time: date().time }');
+           $cs->addLine('@get "http://192.168.1.77:8000/client/goals/DevGoalsGrown.php" {time: date().time, server: "'.$this->m_cr->getServer().'", player: "'.$this->m_cr->getUser().'", city: "'.$this->m_city->getName().'" }');
            $cs->addLine('if $error == null goal $result');
+           $cs->addLine('if $error echo "Bad get on goals"');
            $cs->addLine('completequests routine');
 //        }
      }

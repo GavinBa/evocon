@@ -44,7 +44,8 @@ class DbAltsTest extends TestCase
    
    public function testGetHost() {
       $this->assertNotNull($this->dbAlts);
-      $this->assertSame($this->dbAlts->getHost(),"Imperator");
+      $this->dbAlts->setHostTestOnly("test");
+      $this->assertSame($this->dbAlts->getHost(),"test");
       $this->assertNotSame($this->dbAlts->getHost(),"Impy");
    }
 
@@ -61,6 +62,19 @@ class DbAltsTest extends TestCase
       $this->assertTrue($this->dbAlts->hasApplied());
       $this->dbAlts->setApplied(0);
       $this->assertFalse($this->dbAlts->hasApplied());
+   }
+   
+   public function testGetters() {
+      $this->assertNotNull($this->dbAlts);
+      $this->assertGreaterThanOrEqual(0,$this->dbAlts->getDumpX());
+      $this->assertGreaterThanOrEqual(0,$this->dbAlts->getDumpY());
+      $this->assertGreaterThanOrEqual(0,$this->dbAlts->getMaxGold());
+      $this->assertGreaterThanOrEqual(0,$this->dbAlts->getMaxFood());
+      $this->assertGreaterThanOrEqual(0,$this->dbAlts->getMaxWood());
+      $this->assertGreaterThanOrEqual(0,$this->dbAlts->getMaxStone());
+      $this->assertGreaterThanOrEqual(0,$this->dbAlts->getMaxIron());
+      $this->dbAlts->updateColTestOnly("maxfood", 300);
+      $this->assertEquals(300,$this->dbAlts->getMaxFood());
    }
    
    protected function tearDown() {
