@@ -144,7 +144,7 @@ class NewCity extends StateProcessor {
                   } else {
                      $a = [ "user"    => $p2json->user, 
                             "fieldid" => $p2json->result,
-                            "troopstr" => "a:20k,w:1,wo:1,p:1,sw:1"];
+                            "troopstr" => "a:10k,w:1,wo:1,p:1,sw:1"];
                      $cs->injectScriptVars("client/scripts/AttackUnoccupiedFieldId.txt", $a);
                   }
                   $this->m_cr->getDbc()->setNewCity(2);

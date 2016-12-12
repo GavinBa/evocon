@@ -69,6 +69,8 @@ class DevelopmentMonitor extends City {
               $this->m_dbc->setDevStage(2);
            } else {
               $this->m_cs->addEcho("waiting on townhall - currently at " . $this->m_buildings->getBuildingLevel("Town Hall"));
+              $this->m_cs->addLine('@get "http://192.168.1.77:8000/client/goals/DevGoalsStage02.txt" {time: date().time }');
+              $this->m_cs->addLine('if $error == null goal $result');
            }
            break;
            

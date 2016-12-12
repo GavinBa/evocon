@@ -389,6 +389,19 @@ class DbCity {
      $result = $this->m_db->query("UPDATE city SET castle_idx='" . $idx . "' WHERE id=" . $this->getId());
   }
   
+  public function getFarmIdx() {
+     $idx = 0;
+     $result = $this->m_db->query("SELECT farm_idx FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $idx = $row["farm_idx"];
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $idx;
+  }
+  
 }
 
 ?>

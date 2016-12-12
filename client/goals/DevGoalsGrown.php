@@ -5,6 +5,7 @@ require_once "../../code/db/DbGoals.php";
 ?>
 # start hero management
 config hero:11
+config comfort:1
 
 # Get res fields to minimum levels
 build f:5,q:3,i:3,s:3:13
@@ -44,8 +45,8 @@ fortification trap:1,ab:1
 fortification trap:100,ab:100,at:100
 
 config valleymin:1
-config valley:6
-config hunting:2
+config valley:9
+config hunting:3
 
 valleyheroes any
 valleytroops 1 a:50
@@ -90,16 +91,30 @@ build w:5
 build c:8:8
 build b:5:13
 build a:8
-
+build fo:7,ws:7
+build s:6:28
+build r:9
+build rs:2
+build s:6:31
+build b:6:13
+build a:9
+build rs:6
+# FIRST MICH USED
+build r:10
 
 troop w:10,wo:10,p:10,sw:10,a:10
 troop a:2k,s:100
 troop b:400
 troop t:500
 troop b:800,t:1k,s:5k
+troop wo:1k
+troop w:1k
 troop t:5k,c:5k
 troop s:25k,a:10k
-
+troop c:10k,b:1650
+troop a:25k
+troop t:50k
+troop c:50k
 
 research ag:1,lu:1,mas:1,mi:1
 research in:1,mt:1,ir:1
@@ -118,12 +133,21 @@ research med:1,con:1
 research in:9
 research ir:5,lo:5,com:5
 research met:6,ms:6,mt:6
+research en:1,med:3
+research ir:6,lo:6,com:6
+research en:3,con:5
+research med:5
+research in:10
+research ms:7,met:7,ir:7
+research en:5,lo:7
+research med:6,con:6,en:6
+research con:7
 
 npctroops 5 b:400,t:400
 npcheroes 5 any:att>65
 config npc:5
 
-rallypolicy v:1 m:2
+rallypolicy v:1 m:1 r:3
 
 //n = npc farming
 //b = buildnpc

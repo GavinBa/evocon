@@ -66,7 +66,7 @@ class City {
   }
   
   public function getSelfArmies() {
-     return $this->m_city->selfArmies();
+     return $this->m_city->selfArmies;
   }
   
   public function getEnemyArmies() {

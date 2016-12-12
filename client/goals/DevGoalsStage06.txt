@@ -81,3 +81,5 @@ research com:1,met:2,in:2,mt:2,ir:2,lo:2
 research ms:4
 research mt:4,in:4
 research ar:1,ho:1
+research ar:2,ho:2
+research met:5

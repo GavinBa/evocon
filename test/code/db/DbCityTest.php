@@ -110,6 +110,11 @@ class DbCityTest extends TestCase
       $this->assertEquals(30,$this->dbCity->getIron());
    }
    
+   public function testFarmIdx() {
+      $this->assertNotNull($this->dbCity);
+      $this->assertGreaterThanOrEqual(0,$this->dbCity->getFarmIdx());
+   }
+   
    protected function tearDown() {
       if ($this->dbc) {
          db_disconnectDB($this->dbc);

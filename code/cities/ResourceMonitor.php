@@ -3,6 +3,7 @@
 require_once "code/buildings/buildings.php";
 require_once "code/cities/city.php";
 require_once "code/db/DbAlts.php";
+require_once "code/db/DbCastle.php";
 require_once "code/db/DbGoals.php";
 require_once "code/timers/Timer.php";
 require_once "code/timers/TimerType.php";
@@ -29,6 +30,7 @@ class ResourceMonitor {
      $this->m_cr->getDbc()->setStone($this->m_city->getStoneAmt());
      $this->m_cr->getDbc()->setIron($this->m_city->getIronAmt());
      $this->setDump($cs);
+     $this->sendDumpHit($cs);
   }
   
   protected function setDump($cs) {
@@ -60,6 +62,33 @@ class ResourceMonitor {
               $this->m_cr->getUser(), $this->m_city->getName());
         $goals->purgeGoal("keepresources " . $x . "," . $y . " " . $res);
         $goals->insertGoal("keepresources " . $x . "," . $y . " " . $res . ":" . $max . " 50k cavalry");
+     }
+  }
+  
+  protected function sendDumpHit($cs) {
+     $farmIdx = $this->m_cr->getDbc()->getFarmIdx();
+     if ($farmIdx > 0) {
+        $farmCastle = DbCastle::fromExisting($this->m_cr->getDbconnect(),$farmIdx);
+        if ($farmCastle != NULL) {
+           $farmX = $farmCastle->getX();
+           $farmY = $farmCastle->getY();
+           $armies = $this->m_city->getSelfArmies();
+           $attackFarm = true;
+           foreach ($armies as $army) {
+              $tgtCoords = $army->targetCoords;
+              if ($tgtCoords != NULL) {
+                 $x = explode(",",$tgtCoords)[0];
+                 $y = explode(",",$tgtCoords)[1];
+                 if ($x == $farmX && $y == $farmY) {
+                    $attackFarm = false;
+                    break;
+                 }
+              }
+           }
+           if ($attackFarm) {
+              $cs->addLine("attack ".$farmX.",".$farmY." any a:23k,w:1,p:1,sw:1,t:10k");
+           }
+        }
      }
   }
   

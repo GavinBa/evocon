@@ -64,6 +64,25 @@ class ResourceMonitorTest extends TestCase
    }
    
    
+   public function testDumpHit() {
+      $farmIdx = $this->cr->getDbc()->getFarmIdx();
+      $this->assertGreaterThan(0,$farmIdx);
+      $farmCastle = DbCastle::fromExisting($this->cr->getDbconnect(),$farmIdx);
+      $this->assertNotNull($farmCastle);
+      $this->rm->process($this->cs);
+      
+      $farmX = $farmCastle->getX();
+      $farmY = $farmCastle->getY();
+      $cityJson = Defaults::$defaultCityJson;
+      $cityJsonDecoded = json_decode($cityJson);
+      $cityJsonDecoded->selfArmies[0]->targetCoords = "$farmX,$farmY";
+      $this->tc = new City($cityJsonDecoded);
+      $this->cr = new ClientRequest($this->dbc,Defaults::$server,Defaults::$player,$this->tc);
+      $this->rm = new ResourceMonitor($this->tc,$this->cr);
+      $this->rm->process($this->cs);
+   }
+   
+   
    protected function tearDown() {
       if ($this->dbc) {
          db_disconnectDB($this->dbc);

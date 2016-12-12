@@ -4,6 +4,7 @@
 config hero:11
 
 # Get res fields to minimum levels
+build t:3
 build f:5,q:3,i:3,s:3:13
 # 
 

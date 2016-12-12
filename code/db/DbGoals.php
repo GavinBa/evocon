@@ -34,7 +34,7 @@ class DbGoals {
   
   public function purgeGoal($goal) {
      $result = $this->m_db->query("DELETE FROM goals WHERE server=" .
-           $this->m_server . " AND user LIKE '" . $this->m_player . "' AND city='".
+           $this->m_server . " AND user='" . $this->m_player . "' AND city='".
            $this->m_cityname . "' AND goal LIKE '%" . $goal . "%'");
   }
   
@@ -51,7 +51,8 @@ class DbGoals {
   public function getGoals() {
      $goals = array();
      $idx = 0;
-     $result = $this->m_db->query("SELECT goal FROM goals WHERE _id=".$this->getId());
+     $result = $this->m_db->query("SELECT goal FROM goals WHERE server=" . 
+            $this->m_server . " AND user='" . $this->m_player . "' AND city='".$this->m_cityname."'");
      if ($result->num_rows > 0) {
         while ($row = $result->fetch_assoc()) {
            $goals[$idx++] = $row["goal"];

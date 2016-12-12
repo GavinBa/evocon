@@ -2,6 +2,9 @@ echo 'Starting build process - STAGE 01'
 //echo 'Turning on debug'
 //city.script.debug = true
 
+// Make sure we start with nothing going on (from previous loads/runs)
+resetgoals
+
 if city.getActiveBuilding() echo 'Waiting on active building...'
 if city.getActiveBuilding() repeat
 
@@ -117,7 +120,7 @@ goal "tradepolicy /type:gold /min:50k"
 goal "tradepolicy /type:food /min:50k /max:100k"
 goal "tradepolicy /type:wood /min:25k /max:50k"
 goal "tradepolicy /type:stone /min:25k /max:30k"
-goal "tradepolicy /type:stone /min:5k /max:20k"
+goal "tradepolicy /type:iron /min:5k /max:20k"
 
 sell iron 100
 completequests routine
@@ -162,7 +165,8 @@ echo "step {++s}"
 if city.countBuilding(1) < 8 create c
 if city.countBuilding(1) < 8 repeat
 
-
+b = city.getActiveBuilding()
+# will get error here if no res(stone)
 if !city.hasBuilding(31,2) upgrade /nowait t
 if !city.hasBuilding(31,2) && $error repeat
 
