@@ -78,7 +78,7 @@
 		$ipb = $_POST["ipb"];
 	}
     
-    $server = "197";
+    $server = "200";
     if (isset($_POST["server"]) == true) {
        $server = $_POST["server"];
     }

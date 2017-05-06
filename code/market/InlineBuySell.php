@@ -521,8 +521,23 @@ class InlineBuySell {
         }
     }
     
+    // if lots of food and not so much gold sell food at reasonable price
+    if ($foodAmt > 2000000000) {
+       if ($fpb > 1.5 && $goldAmt < 1000000000) {
+          $this->emitTrade("sell food", 2000000,$fpb,"sell food at good price");
+          return false;
+       }
+       if ($fpb > 2.5 && $goldAmt < 3000000000) {
+          $this->emitTrade("sell food", 5000000,$fpb,"sell food at good price");
+          return false;
+       }
+       if ($fpb > 3.5 && $goldAmt < 10000000000) {
+          $this->emitTrade("sell food", 5000000,$fpb,"sell food at good price");
+          return false;
+       }
+    }
     
-    
+   $this->m_cs->addEcho("[inline] No action"); 
 	$this->m_cs->addLine($msg . " ; ( " . number_format(microtime(true) - $_SERVER["REQUEST_TIME_FLOAT"],3) . " )");
 	
 	return false;

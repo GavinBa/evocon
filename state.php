@@ -72,8 +72,9 @@ class StateController {
                break;
                
             case STATE_DEADCITIES:
-               $p = new DeadCities($this->m_city,$this->m_cr);
-               $result = $p->process($this->m_cs,$state);
+//               $p = new DeadCities($this->m_city,$this->m_cr);
+//               $result = $p->process($this->m_cs,$state);
+               $result = STATE_SUSPEND;
                break;
                
             case STATE_MARKET:
@@ -107,6 +108,7 @@ class StateController {
       /* If all states reach a suspended state then transition back to idle. */      
       if ($result == STATE_SUSPEND) { 
          $result = STATE_IDLE;
+         $this->m_cs->addLine("completequests daily");
       }
 
       return $result;

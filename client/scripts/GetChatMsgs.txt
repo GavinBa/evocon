@@ -1,2 +1,2 @@
 (t = []) && (x = 1) && (z = CreateFunction("f","(x = GetChat('private',20,false)) && (f.push(x)) && z(f)")) && (z(t))
-p9v = json_encode(t)
+if t.length > 0 p9v = json_encode(t)

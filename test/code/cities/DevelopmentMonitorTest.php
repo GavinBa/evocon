@@ -143,6 +143,23 @@ class DevelopmentMonitorTest extends TestCase
 
    }   
    
+   public function testProcessFledging() {
+      foreach($this->tcJson->buildings as $myBuilding) {
+         if ($myBuilding->name == "Town Hall") {
+            $myBuilding->level = 5;
+            break;
+         }
+      }
+       $this->assertNotNull($this->dbc);
+       $this->assertNotNull($this->dbCity);
+       $dm = new DevelopmentMonitor($this->tc, $this->cr, $this->dbCity);
+       $this->assertTrue($dm->isMonitoring());
+       $this->assertFalse(Development::isNestling($this->dbCity->getDevelopment()));
+       $this->assertTrue(Development::isFledgling($this->dbCity->getDevelopment()));
+       $this->dbCity->setDevStage(1);
+       $this->assertEquals(1,$this->dbCity->getDevStage());
+   }
+   
    protected function tearDown() {
       if ($this->dbc) {
          db_disconnectDB($this->dbc);

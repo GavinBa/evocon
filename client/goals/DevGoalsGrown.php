@@ -46,7 +46,7 @@ fortification trap:100,ab:100,at:100
 
 config valleymin:1
 config valley:9
-config hunting:3
+config hunting:4
 
 valleyheroes any
 valleytroops 1 a:50
@@ -58,7 +58,7 @@ valleytroops 6 a:1600,sw:1,p:1,w:1
 valleytroops 7 a:10000,sw:1,p:1,s:1,w:1,c:1
 valleytroops 8 a:15000,sw:1,p:1,s:1,w:1,c:1
 valleytroops 9 a:20000,sw:1,p:1,s:1,w:1,c:1,b:1
-valleytroops 10 a:30000,sw:1,p:1,s:1,w:1,c:1,b:1
+valleytroops 10 a:24000,sw:1,p:1,s:1,w:1,c:1,b:1
 
 
 build c:4:8
@@ -101,6 +101,9 @@ build a:9
 build rs:6
 # FIRST MICH USED
 build r:10
+build t:9
+# need lvl10 th for general
+build t:10
 
 troop w:10,wo:10,p:10,sw:10,a:10
 troop a:2k,s:100
@@ -115,6 +118,7 @@ troop c:10k,b:1650
 troop a:25k
 troop t:50k
 troop c:50k
+troop a:35k
 
 research ag:1,lu:1,mas:1,mi:1
 research in:1,mt:1,ir:1
@@ -142,6 +146,7 @@ research ms:7,met:7,ir:7
 research en:5,lo:7
 research med:6,con:6,en:6
 research con:7
+research lo:8
 
 npctroops 5 b:400,t:400
 npcheroes 5 any:att>65

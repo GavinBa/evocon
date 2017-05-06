@@ -13,6 +13,7 @@ require_once "code/buildings/buildings.php";
 require_once "code/db/DbCity.php";
 require_once "code/request/ClientRequest.php";
 require_once "code/script/ClientScript.php";
+require_once "code/script/ManualScript.php";
 
 /* Get a connection to the database. */
 $dbc = db_connectDB();
@@ -77,6 +78,10 @@ $cm->process($cScript);
 
 $rm = new ResourceMonitor($c, $cReq);
 $rm->process($cScript);
+
+/* Create and process any manual script */
+$ms = new ManualScript($dbc,$server,$userName,$c);
+$ms->checkForManual($cScript);
 
 /* Update the state */
 $s = new StateController($c, $cScript, $cReq);

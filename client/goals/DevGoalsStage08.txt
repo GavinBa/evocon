@@ -44,6 +44,8 @@ config valleymin:1
 config valley:6
 config hunting:2
 
+config buildnpc:15
+
 valleyheroes any
 valleytroops 1 a:50
 valleytroops 2 a:100
@@ -67,6 +69,7 @@ build st:2
 build b:3:12
 build m:3
 build fo:4
+build e:1
 
 build b:4:12
 build r:5
@@ -74,6 +77,7 @@ build fh:5,be:5
 build c:6:8
 build s:4:16,i:4,q:4
 build fo:5,ws:5,st:5
+build e:2
 build b:9:2
 build s:5:22
 build b:9:4
@@ -82,6 +86,7 @@ build t:6
 
 troop w:10,wo:10,p:10,sw:10,a:10
 troop a:2k,s:100
+troop wo:500
 troop b:400
 troop t:500
 troop b:800,t:1k
@@ -100,9 +105,11 @@ research ar:2,ho:2
 research met:5
 research ar:8,ho:6,mt:5,in:7
 
+npctroops 1 b:20,t:20
+npcheroes 1 any:attack>65
 npctroops 5 b:400,t:250
 npcheroes 5 any
-config npc:5
+//config npc:1
 
 rallypolicy v:1 m:2
 

@@ -18,7 +18,8 @@ class StateMarket extends StateProcessor {
         case STATE_MARKET:
            $a = [ "server" => $this->m_cr->getServer(), 
                   "user" => $this->m_cr->getUser(), 
-                  "city" => $this->m_city->getName()];
+                  "city" => $this->m_city->getName(),
+                  "basebuyamt" => $this->m_city->getBuyAmt()];
            $cs->injectScriptVars("client/scripts/BuySell.txt", $a);
            $result = STATE_SUSPEND;
            break;

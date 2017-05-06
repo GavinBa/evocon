@@ -83,6 +83,10 @@ class DevelopmentMonitor extends City {
   }
   
   protected function processFledgling() {
+     
+     // always check for apply at this point
+     $this->checkForApply();
+     
      $stage = $this->m_dbc->getDevStage();
      switch ($stage) {
         case 10:
@@ -95,6 +99,7 @@ class DevelopmentMonitor extends City {
            $this->m_cs->addEcho('Stage 11 (' . $this->m_cr->getUser() . ':' . $this->m_city->getName() . ') - Upgrade barracks to 9 - and research');
            $this->m_cs->addLine('@get "http://192.168.1.77:8000/client/goals/DevGoalsStage08.txt" {time: date().time }');
            $this->m_cs->addLine('if $error == null goal $result');
+           $this->m_cs->addEcho('Goals set from DevGoalsStage08.txt');
            
            break;
            
@@ -215,6 +220,20 @@ class DevelopmentMonitor extends City {
            break;
      }
      
+  }
+  
+  protected function checkForApply()
+  {
+     // at this point see if we can join alliance
+     $dba = new DbAlts($this->m_cr->getDbconnect(), $this->m_cr->getServer(), $this->m_cr->getUser(), $this->m_city);
+     if ($dba->playerExists() && !$dba->hasApplied()) {
+        $alliance = $dba->getAlliance();
+        // apply
+        $this->m_cs->addLine("command \"apply " . $alliance . "\"");
+        $dba->setApplied(1);
+        // send whisper to host
+        $this->m_cs->addLine("whisper " . $dba->getHost() . " APPLY");
+     }
   }
 
 }

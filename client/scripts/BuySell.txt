@@ -2,8 +2,9 @@ config trade:0
 // server=__server__
 // user=__user__
 // city=__city__
+// basebuyamt=__basebuyamt__
 
-p = {CITYTYPE:2, MINRESFOOD:500000, MINRESGOLD:200000, MINRESWOOD:100000, MINRESIRON:100000, MINRESSTONE:50000, TROOPRESFACTOR:4, AVGSPAN:200, BASEBUYAMT:20000 }
+p = {CITYTYPE:2, MINRESFOOD:500000, MINRESGOLD:200000, MINRESWOOD:100000, MINRESIRON:100000, MINRESSTONE:50000, TROOPRESFACTOR:4, AVGSPAN:200, BASEBUYAMT:__basebuyamt__ }
 
 set famt m_city.cityManager.resource.food.amount
 set iamt m_city.cityManager.resource.iron.amount

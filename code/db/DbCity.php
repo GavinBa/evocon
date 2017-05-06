@@ -401,6 +401,24 @@ class DbCity {
      }
      return $idx;
   }
+
+  public function getRunManualScript() {
+     $rms = false;
+     $result = $this->m_db->query("SELECT runManualScript FROM city WHERE id=" . $this->getId());
+     if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $rms = ($row["runManualScript"] > 0);
+     }
+     if ($result) {
+        $result->free();
+     }
+     return $rms;
+     
+  }
+  
+  public function setRunManualScript($v) {
+     $result = $this->m_db->query("UPDATE city SET runManualScript='" . $v . "' WHERE id=" . $this->getId());
+  }
   
 }
 

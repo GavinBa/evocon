@@ -40,7 +40,17 @@ class Timer {
    public function getDbTimerTestOnly() {
       return $this->m_dbtimer;
    }
-  
+   
+   public function isActive($ctime) {
+      $f1 = floatval($ctime);
+      $f2 = floatval($this->m_dbtimer->getTimerVal());
+      return ($f1 < $f2);
+   }
+   
+   public function cancel() {
+      $this->m_dbtimer->setTimerVal(0);
+   }
+   
 }
 
 ?>
